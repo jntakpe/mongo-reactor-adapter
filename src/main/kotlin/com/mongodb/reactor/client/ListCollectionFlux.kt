@@ -8,7 +8,7 @@ import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.toMono
 import java.util.concurrent.TimeUnit
 
-class ListCollectionFlux<T>(private val delegate: ListCollectionsPublisher<T>) : Flux<T>(), ListCollectionsPublisher<T> {
+public class ListCollectionFlux<T>(private val delegate: ListCollectionsPublisher<T>) : Flux<T>(), ListCollectionsPublisher<T> {
 
     override fun filter(filter: Bson?): ListCollectionFlux<T> = delegate.filter(filter).toReactor()
 
@@ -19,6 +19,6 @@ class ListCollectionFlux<T>(private val delegate: ListCollectionsPublisher<T>) :
     override fun first(): Mono<T> = delegate.first().toMono()
 
     override fun subscribe(actual: CoreSubscriber<in T>) {
-        delegate.toReactor().subscribe(actual)
+        delegate.subscribe(actual)
     }
 }

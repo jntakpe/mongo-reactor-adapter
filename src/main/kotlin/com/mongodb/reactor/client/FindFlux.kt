@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.toMono
 import java.util.concurrent.TimeUnit
 
-class FindFlux<T>(private val delegate: FindPublisher<T>) : Flux<T>(), FindPublisher<T> {
+public class FindFlux<T>(private val delegate: FindPublisher<T>) : Flux<T>(), FindPublisher<T> {
 
     override fun first(): Mono<T> = delegate.first().toMono()
 
@@ -58,6 +58,6 @@ class FindFlux<T>(private val delegate: FindPublisher<T>) : Flux<T>(), FindPubli
     override fun allowDiskUse(allowDiskUse: Boolean?): FindFlux<T> = delegate.allowDiskUse(allowDiskUse).toReactor()
 
     override fun subscribe(actual: CoreSubscriber<in T>) {
-        delegate.toReactor().subscribe(actual)
+        delegate.subscribe(actual)
     }
 }

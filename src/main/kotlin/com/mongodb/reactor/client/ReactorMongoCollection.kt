@@ -27,7 +27,6 @@ import com.mongodb.client.result.InsertManyResult
 import com.mongodb.client.result.InsertOneResult
 import com.mongodb.client.result.UpdateResult
 import com.mongodb.reactivestreams.client.ClientSession
-import com.mongodb.reactivestreams.client.DistinctPublisher
 import com.mongodb.reactivestreams.client.MongoCollection
 import org.bson.Document
 import org.bson.codecs.configuration.CodecRegistry
@@ -35,7 +34,7 @@ import org.bson.conversions.Bson
 import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.toMono
 
-class ReactorMongoCollection<T>(private val delegate: MongoCollection<T>) : MongoCollection<T> by delegate {
+public class ReactorMongoCollection<T>(private val delegate: MongoCollection<T>) : MongoCollection<T> by delegate {
 
     override fun <NewTDocument : Any> withDocumentClass(clazz: Class<NewTDocument>): ReactorMongoCollection<NewTDocument> {
         return ReactorMongoCollection(delegate.withDocumentClass(clazz))
@@ -79,11 +78,11 @@ class ReactorMongoCollection<T>(private val delegate: MongoCollection<T>) : Mong
         return delegate.countDocuments(clientSession, filter, options).toMono()
     }
 
-    override fun <TResult : Any> distinct(fieldName: String, resultClass: Class<TResult>): DistinctPublisher<TResult> {
+    override fun <TResult : Any> distinct(fieldName: String, resultClass: Class<TResult>): DistinctFlux<TResult> {
         return delegate.distinct(fieldName, resultClass).toReactor()
     }
 
-    override fun <TResult : Any> distinct(fieldName: String, filter: Bson, resultClass: Class<TResult>): DistinctPublisher<TResult> {
+    override fun <TResult : Any> distinct(fieldName: String, filter: Bson, resultClass: Class<TResult>): DistinctFlux<TResult> {
         return delegate.distinct(fieldName, filter, resultClass).toReactor()
     }
 
@@ -91,8 +90,8 @@ class ReactorMongoCollection<T>(private val delegate: MongoCollection<T>) : Mong
         clientSession: ClientSession,
         fieldName: String,
         resultClass: Class<TResult>
-    ): DistinctPublisher<TResult> {
-        return delegate.distinct(clientSession, fieldName, resultClass)
+    ): DistinctFlux<TResult> {
+        return delegate.distinct(clientSession, fieldName, resultClass).toReactor()
     }
 
     override fun <TResult : Any> distinct(
@@ -100,8 +99,8 @@ class ReactorMongoCollection<T>(private val delegate: MongoCollection<T>) : Mong
         fieldName: String,
         filter: Bson,
         resultClass: Class<TResult>
-    ): DistinctPublisher<TResult> {
-        return delegate.distinct(clientSession, fieldName, filter, resultClass)
+    ): DistinctFlux<TResult> {
+        return delegate.distinct(clientSession, fieldName, filter, resultClass).toReactor()
     }
 
     override fun find(): FindFlux<T> = delegate.find().toReactor()
@@ -126,19 +125,19 @@ class ReactorMongoCollection<T>(private val delegate: MongoCollection<T>) : Mong
         return delegate.find(clientSession, filter, clazz).toReactor()
     }
 
-    override fun aggregate(pipeline: MutableList<out Bson>): AggregateFlux<T> = delegate.aggregate(pipeline).toReactor()
+    override fun aggregate(pipeline: List<Bson>) = delegate.aggregate(pipeline).toReactor()
 
-    override fun <TResult : Any> aggregate(pipeline: MutableList<out Bson>, clazz: Class<TResult>): AggregateFlux<TResult> {
+    override fun <TResult : Any> aggregate(pipeline: List<Bson>, clazz: Class<TResult>): AggregateFlux<TResult> {
         return delegate.aggregate(pipeline, clazz).toReactor()
     }
 
-    override fun aggregate(clientSession: ClientSession, pipeline: MutableList<out Bson>): AggregateFlux<T> {
+    override fun aggregate(clientSession: ClientSession, pipeline: List<Bson>): AggregateFlux<T> {
         return delegate.aggregate(clientSession, pipeline).toReactor()
     }
 
     override fun <TResult : Any> aggregate(
         clientSession: ClientSession,
-        pipeline: MutableList<out Bson>,
+        pipeline: List<Bson>,
         clazz: Class<TResult>
     ): AggregateFlux<TResult> {
         return delegate.aggregate(clientSession, pipeline, clazz).toReactor()
@@ -148,9 +147,9 @@ class ReactorMongoCollection<T>(private val delegate: MongoCollection<T>) : Mong
 
     override fun <TResult : Any> watch(resultClass: Class<TResult>): ChangeStreamFlux<TResult> = delegate.watch(resultClass).toReactor()
 
-    override fun watch(pipeline: MutableList<out Bson>): ChangeStreamFlux<Document> = delegate.watch(pipeline).toReactor()
+    override fun watch(pipeline: List<Bson>): ChangeStreamFlux<Document> = delegate.watch(pipeline).toReactor()
 
-    override fun <TResult : Any> watch(pipeline: MutableList<out Bson>, resultClass: Class<TResult>): ChangeStreamFlux<TResult> {
+    override fun <TResult : Any> watch(pipeline: List<Bson>, resultClass: Class<TResult>): ChangeStreamFlux<TResult> {
         return delegate.watch(pipeline, resultClass).toReactor()
     }
 
@@ -160,13 +159,13 @@ class ReactorMongoCollection<T>(private val delegate: MongoCollection<T>) : Mong
         return delegate.watch(clientSession, resultClass).toReactor()
     }
 
-    override fun watch(clientSession: ClientSession, pipeline: MutableList<out Bson>): ChangeStreamFlux<Document> {
+    override fun watch(clientSession: ClientSession, pipeline: List<Bson>): ChangeStreamFlux<Document> {
         return delegate.watch(clientSession, pipeline).toReactor()
     }
 
     override fun <TResult : Any> watch(
         clientSession: ClientSession,
-        pipeline: MutableList<out Bson>,
+        pipeline: List<Bson>,
         resultClass: Class<TResult>
     ): ChangeStreamFlux<TResult> {
         return delegate.watch(clientSession, pipeline, resultClass).toReactor()
@@ -197,19 +196,19 @@ class ReactorMongoCollection<T>(private val delegate: MongoCollection<T>) : Mong
         return delegate.mapReduce(clientSession, mapFunction, reduceFunction, clazz).toReactor()
     }
 
-    override fun bulkWrite(requests: MutableList<out WriteModel<out T>>): Mono<BulkWriteResult> = delegate.bulkWrite(requests).toMono()
+    override fun bulkWrite(requests: List<WriteModel<out T>>): Mono<BulkWriteResult> = delegate.bulkWrite(requests).toMono()
 
-    override fun bulkWrite(requests: MutableList<out WriteModel<out T>>, options: BulkWriteOptions): Mono<BulkWriteResult> {
+    override fun bulkWrite(requests: List<WriteModel<out T>>, options: BulkWriteOptions): Mono<BulkWriteResult> {
         return delegate.bulkWrite(requests, options).toMono()
     }
 
-    override fun bulkWrite(clientSession: ClientSession, requests: MutableList<out WriteModel<out T>>): Mono<BulkWriteResult> {
+    override fun bulkWrite(clientSession: ClientSession, requests: List<WriteModel<out T>>): Mono<BulkWriteResult> {
         return delegate.bulkWrite(clientSession, requests).toMono()
     }
 
     override fun bulkWrite(
         clientSession: ClientSession,
-        requests: MutableList<out WriteModel<out T>>,
+        requests: List<WriteModel<out T>>,
         options: BulkWriteOptions
     ): Mono<BulkWriteResult> {
         return delegate.bulkWrite(clientSession, requests, options).toMono()
@@ -227,19 +226,19 @@ class ReactorMongoCollection<T>(private val delegate: MongoCollection<T>) : Mong
         return delegate.insertOne(clientSession, document, options).toMono()
     }
 
-    override fun insertMany(documents: MutableList<out T>): Mono<InsertManyResult> = delegate.insertMany(documents).toMono()
+    override fun insertMany(documents: List<T>): Mono<InsertManyResult> = delegate.insertMany(documents).toMono()
 
-    override fun insertMany(documents: MutableList<out T>, options: InsertManyOptions): Mono<InsertManyResult> {
+    override fun insertMany(documents: List<T>, options: InsertManyOptions): Mono<InsertManyResult> {
         return delegate.insertMany(documents, options).toMono()
     }
 
-    override fun insertMany(clientSession: ClientSession, documents: MutableList<out T>): Mono<InsertManyResult> {
+    override fun insertMany(clientSession: ClientSession, documents: List<T>): Mono<InsertManyResult> {
         return delegate.insertMany(clientSession, documents).toMono()
     }
 
     override fun insertMany(
         clientSession: ClientSession,
-        documents: MutableList<out T>,
+        documents: List<T>,
         options: InsertManyOptions
     ): Mono<InsertManyResult> {
         return delegate.insertMany(clientSession, documents, options).toMono()
@@ -302,22 +301,22 @@ class ReactorMongoCollection<T>(private val delegate: MongoCollection<T>) : Mong
         return delegate.updateOne(clientSession, filter, update, options).toMono()
     }
 
-    override fun updateOne(filter: Bson, update: MutableList<out Bson>): Mono<UpdateResult> {
+    override fun updateOne(filter: Bson, update: List<Bson>): Mono<UpdateResult> {
         return delegate.updateOne(filter, update).toMono()
     }
 
-    override fun updateOne(filter: Bson, update: MutableList<out Bson>, options: UpdateOptions): Mono<UpdateResult> {
+    override fun updateOne(filter: Bson, update: List<Bson>, options: UpdateOptions): Mono<UpdateResult> {
         return delegate.updateOne(filter, update, options).toMono()
     }
 
-    override fun updateOne(clientSession: ClientSession, filter: Bson, update: MutableList<out Bson>): Mono<UpdateResult> {
+    override fun updateOne(clientSession: ClientSession, filter: Bson, update: List<Bson>): Mono<UpdateResult> {
         return delegate.updateOne(clientSession, filter, update).toMono()
     }
 
     override fun updateOne(
         clientSession: ClientSession,
         filter: Bson,
-        update: MutableList<out Bson>,
+        update: List<Bson>,
         options: UpdateOptions
     ): Mono<UpdateResult> {
         return delegate.updateOne(clientSession, filter, update, options).toMono()
@@ -337,22 +336,22 @@ class ReactorMongoCollection<T>(private val delegate: MongoCollection<T>) : Mong
         return delegate.updateMany(clientSession, filter, update, options).toMono()
     }
 
-    override fun updateMany(filter: Bson, update: MutableList<out Bson>): Mono<UpdateResult> {
+    override fun updateMany(filter: Bson, update: List<Bson>): Mono<UpdateResult> {
         return delegate.updateMany(filter, update).toMono()
     }
 
-    override fun updateMany(filter: Bson, update: MutableList<out Bson>, options: UpdateOptions): Mono<UpdateResult> {
+    override fun updateMany(filter: Bson, update: List<Bson>, options: UpdateOptions): Mono<UpdateResult> {
         return delegate.updateMany(filter, update, options).toMono()
     }
 
-    override fun updateMany(clientSession: ClientSession, filter: Bson, update: MutableList<out Bson>): Mono<UpdateResult> {
+    override fun updateMany(clientSession: ClientSession, filter: Bson, update: List<Bson>): Mono<UpdateResult> {
         return delegate.updateMany(clientSession, filter, update).toMono()
     }
 
     override fun updateMany(
         clientSession: ClientSession,
         filter: Bson,
-        update: MutableList<out Bson>,
+        update: List<Bson>,
         options: UpdateOptions
     ): Mono<UpdateResult> {
         return delegate.updateMany(clientSession, filter, update, options).toMono()
@@ -414,22 +413,22 @@ class ReactorMongoCollection<T>(private val delegate: MongoCollection<T>) : Mong
         return delegate.findOneAndUpdate(clientSession, filter, update, options).toMono()
     }
 
-    override fun findOneAndUpdate(filter: Bson, update: MutableList<out Bson>): Mono<T> {
+    override fun findOneAndUpdate(filter: Bson, update: List<Bson>): Mono<T> {
         return delegate.findOneAndUpdate(filter, update).toMono()
     }
 
-    override fun findOneAndUpdate(filter: Bson, update: MutableList<out Bson>, options: FindOneAndUpdateOptions): Mono<T> {
+    override fun findOneAndUpdate(filter: Bson, update: List<Bson>, options: FindOneAndUpdateOptions): Mono<T> {
         return delegate.findOneAndUpdate(filter, update, options).toMono()
     }
 
-    override fun findOneAndUpdate(clientSession: ClientSession, filter: Bson, update: MutableList<out Bson>): Mono<T> {
+    override fun findOneAndUpdate(clientSession: ClientSession, filter: Bson, update: List<Bson>): Mono<T> {
         return delegate.findOneAndUpdate(clientSession, filter, update).toMono()
     }
 
     override fun findOneAndUpdate(
         clientSession: ClientSession,
         filter: Bson,
-        update: MutableList<out Bson>,
+        update: List<Bson>,
         options: FindOneAndUpdateOptions
     ): Mono<T> {
         return delegate.findOneAndUpdate(clientSession, filter, update, options).toMono()
@@ -451,19 +450,19 @@ class ReactorMongoCollection<T>(private val delegate: MongoCollection<T>) : Mong
         return delegate.createIndex(clientSession, key, options).toMono()
     }
 
-    override fun createIndexes(indexes: MutableList<IndexModel>): Mono<String> = delegate.createIndexes(indexes).toMono()
+    override fun createIndexes(indexes: List<IndexModel>): Mono<String> = delegate.createIndexes(indexes).toMono()
 
-    override fun createIndexes(indexes: MutableList<IndexModel>, createIndexOptions: CreateIndexOptions): Mono<String> {
-        return delegate.createIndexes(indexes).toMono()
+    override fun createIndexes(indexes: List<IndexModel>, createIndexOptions: CreateIndexOptions): Mono<String> {
+        return delegate.createIndexes(indexes, createIndexOptions).toMono()
     }
 
-    override fun createIndexes(clientSession: ClientSession, indexes: MutableList<IndexModel>): Mono<String> {
+    override fun createIndexes(clientSession: ClientSession, indexes: List<IndexModel>): Mono<String> {
         return delegate.createIndexes(clientSession, indexes).toMono()
     }
 
     override fun createIndexes(
         clientSession: ClientSession,
-        indexes: MutableList<IndexModel>,
+        indexes: List<IndexModel>,
         createIndexOptions: CreateIndexOptions
     ): Mono<String> {
         return delegate.createIndexes(clientSession, indexes, createIndexOptions).toMono()

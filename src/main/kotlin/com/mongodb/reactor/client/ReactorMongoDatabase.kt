@@ -6,7 +6,6 @@ import com.mongodb.WriteConcern
 import com.mongodb.client.model.CreateCollectionOptions
 import com.mongodb.client.model.CreateViewOptions
 import com.mongodb.reactivestreams.client.ClientSession
-import com.mongodb.reactivestreams.client.ListCollectionsPublisher
 import com.mongodb.reactivestreams.client.MongoDatabase
 import org.bson.Document
 import org.bson.codecs.configuration.CodecRegistry
@@ -16,7 +15,7 @@ import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.toFlux
 import reactor.kotlin.core.publisher.toMono
 
-class ReactorMongoDatabase(private val delegate: MongoDatabase) : MongoDatabase by delegate {
+public class ReactorMongoDatabase(private val delegate: MongoDatabase) : MongoDatabase by delegate {
 
     override fun withCodecRegistry(codecRegistry: CodecRegistry): ReactorMongoDatabase {
         return ReactorMongoDatabase(delegate.withCodecRegistry(codecRegistry))
@@ -81,17 +80,21 @@ class ReactorMongoDatabase(private val delegate: MongoDatabase) : MongoDatabase 
 
     override fun listCollectionNames(clientSession: ClientSession): Flux<String> = delegate.listCollectionNames(clientSession).toFlux()
 
-    override fun listCollections(): ListCollectionsPublisher<Document> = delegate.listCollections()
+    override fun listCollections(): ListCollectionFlux<Document> = delegate.listCollections().toReactor()
 
-    override fun <TResult : Any> listCollections(clazz: Class<TResult>): ListCollectionsPublisher<TResult> = delegate.listCollections(clazz)
+    override fun <TResult : Any> listCollections(clazz: Class<TResult>): ListCollectionFlux<TResult> {
+        return delegate.listCollections(clazz).toReactor()
+    }
 
-    override fun listCollections(clientSession: ClientSession): ListCollectionsPublisher<Document> = delegate.listCollections(clientSession)
+    override fun listCollections(clientSession: ClientSession): ListCollectionFlux<Document> {
+        return delegate.listCollections(clientSession).toReactor()
+    }
 
     override fun <TResult : Any> listCollections(
         clientSession: ClientSession,
         clazz: Class<TResult>
-    ): ListCollectionsPublisher<TResult> {
-        return delegate.listCollections(clientSession, clazz)
+    ): ListCollectionFlux<TResult> {
+        return delegate.listCollections(clientSession, clazz).toReactor()
     }
 
     override fun createCollection(collectionName: String): Mono<Void> = delegate.createCollection(collectionName).toMono()
@@ -112,14 +115,14 @@ class ReactorMongoDatabase(private val delegate: MongoDatabase) : MongoDatabase 
         return delegate.createCollection(clientSession, collectionName, options).toMono()
     }
 
-    override fun createView(viewName: String, viewOn: String, pipeline: MutableList<out Bson>): Mono<Void> {
+    override fun createView(viewName: String, viewOn: String, pipeline: List<Bson>): Mono<Void> {
         return delegate.createView(viewName, viewOn, pipeline).toMono()
     }
 
     override fun createView(
         viewName: String,
         viewOn: String,
-        pipeline: MutableList<out Bson>,
+        pipeline: List<Bson>,
         createViewOptions: CreateViewOptions
     ): Mono<Void> {
         return delegate.createView(viewName, viewOn, pipeline, createViewOptions).toMono()
@@ -129,7 +132,7 @@ class ReactorMongoDatabase(private val delegate: MongoDatabase) : MongoDatabase 
         clientSession: ClientSession,
         viewName: String,
         viewOn: String,
-        pipeline: MutableList<out Bson>
+        pipeline: List<Bson>
     ): Mono<Void> {
         return delegate.createView(clientSession, viewName, viewOn, pipeline).toMono()
     }
@@ -138,7 +141,7 @@ class ReactorMongoDatabase(private val delegate: MongoDatabase) : MongoDatabase 
         clientSession: ClientSession,
         viewName: String,
         viewOn: String,
-        pipeline: MutableList<out Bson>,
+        pipeline: List<Bson>,
         createViewOptions: CreateViewOptions
     ): Mono<Void> {
         return delegate.createView(clientSession, viewName, viewOn, pipeline, createViewOptions).toMono()
@@ -148,9 +151,9 @@ class ReactorMongoDatabase(private val delegate: MongoDatabase) : MongoDatabase 
 
     override fun <TResult : Any> watch(resultClass: Class<TResult>): ChangeStreamFlux<TResult> = delegate.watch(resultClass).toReactor()
 
-    override fun watch(pipeline: MutableList<out Bson>): ChangeStreamFlux<Document> = delegate.watch(pipeline).toReactor()
+    override fun watch(pipeline: List<Bson>): ChangeStreamFlux<Document> = delegate.watch(pipeline).toReactor()
 
-    override fun <TResult : Any> watch(pipeline: MutableList<out Bson>, resultClass: Class<TResult>): ChangeStreamFlux<TResult> {
+    override fun <TResult : Any> watch(pipeline: List<Bson>, resultClass: Class<TResult>): ChangeStreamFlux<TResult> {
         return delegate.watch(pipeline, resultClass).toReactor()
     }
 
@@ -160,31 +163,31 @@ class ReactorMongoDatabase(private val delegate: MongoDatabase) : MongoDatabase 
         return delegate.watch(clientSession, resultClass).toReactor()
     }
 
-    override fun watch(clientSession: ClientSession, pipeline: MutableList<out Bson>): ChangeStreamFlux<Document> {
+    override fun watch(clientSession: ClientSession, pipeline: List<Bson>): ChangeStreamFlux<Document> {
         return delegate.watch(clientSession, pipeline).toReactor()
     }
 
     override fun <TResult : Any> watch(
         clientSession: ClientSession,
-        pipeline: MutableList<out Bson>,
+        pipeline: List<Bson>,
         resultClass: Class<TResult>
     ): ChangeStreamFlux<TResult> {
         return delegate.watch(clientSession, pipeline, resultClass).toReactor()
     }
 
-    override fun aggregate(pipeline: MutableList<out Bson>): AggregateFlux<Document> = delegate.aggregate(pipeline).toReactor()
+    override fun aggregate(pipeline: List<Bson>): AggregateFlux<Document> = delegate.aggregate(pipeline).toReactor()
 
-    override fun <TResult : Any> aggregate(pipeline: MutableList<out Bson>, resultClass: Class<TResult>): AggregateFlux<TResult> {
+    override fun <TResult : Any> aggregate(pipeline: List<Bson>, resultClass: Class<TResult>): AggregateFlux<TResult> {
         return delegate.aggregate(pipeline, resultClass).toReactor()
     }
 
-    override fun aggregate(clientSession: ClientSession, pipeline: MutableList<out Bson>): AggregateFlux<Document> {
+    override fun aggregate(clientSession: ClientSession, pipeline: List<Bson>): AggregateFlux<Document> {
         return delegate.aggregate(clientSession, pipeline).toReactor()
     }
 
     override fun <TResult : Any> aggregate(
         clientSession: ClientSession,
-        pipeline: MutableList<out Bson>,
+        pipeline: List<Bson>,
         resultClass: Class<TResult>
     ): AggregateFlux<TResult> {
         return delegate.aggregate(clientSession, pipeline, resultClass).toReactor()

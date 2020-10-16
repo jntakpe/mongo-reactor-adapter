@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.toMono
 import java.util.concurrent.TimeUnit
 
-class MapReduceFlux<T>(private val delegate: MapReducePublisher<T>) : Flux<T>(), MapReducePublisher<T> {
+public class MapReduceFlux<T>(private val delegate: MapReducePublisher<T>) : Flux<T>(), MapReducePublisher<T> {
 
     override fun collectionName(collectionName: String): MapReduceFlux<T> = delegate.collectionName(collectionName).toReactor()
 
@@ -51,6 +51,6 @@ class MapReduceFlux<T>(private val delegate: MapReducePublisher<T>) : Flux<T>(),
     override fun first(): Mono<T> = delegate.first().toMono()
 
     override fun subscribe(actual: CoreSubscriber<in T>) {
-        delegate.toReactor().subscribe(actual)
+        delegate.subscribe(actual)
     }
 }

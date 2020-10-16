@@ -7,7 +7,7 @@ import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.toMono
 import java.util.concurrent.TimeUnit
 
-class ListIndexesFlux<T>(private val delegate: ListIndexesPublisher<T>) : Flux<T>(), ListIndexesPublisher<T> {
+public class ListIndexesFlux<T>(private val delegate: ListIndexesPublisher<T>) : Flux<T>(), ListIndexesPublisher<T> {
 
     override fun maxTime(maxTime: Long, timeUnit: TimeUnit): ListIndexesFlux<T> = delegate.maxTime(maxTime, timeUnit).toReactor()
 
@@ -16,6 +16,6 @@ class ListIndexesFlux<T>(private val delegate: ListIndexesPublisher<T>) : Flux<T
     override fun first(): Mono<T> = delegate.first().toMono()
 
     override fun subscribe(actual: CoreSubscriber<in T>) {
-        delegate.toReactor().subscribe(actual)
+        delegate.subscribe(actual)
     }
 }

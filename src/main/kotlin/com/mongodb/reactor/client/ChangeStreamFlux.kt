@@ -12,7 +12,8 @@ import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.toMono
 import java.util.concurrent.TimeUnit
 
-class ChangeStreamFlux<T>(private val delegate: ChangeStreamPublisher<T>) : Flux<ChangeStreamDocument<T>>(), ChangeStreamPublisher<T> {
+public class ChangeStreamFlux<T>(private val delegate: ChangeStreamPublisher<T>) : Flux<ChangeStreamDocument<T>>(),
+                                                                                   ChangeStreamPublisher<T> {
 
     override fun fullDocument(fullDocument: FullDocument): ChangeStreamFlux<T> = delegate.fullDocument(fullDocument).toReactor()
 
@@ -39,6 +40,6 @@ class ChangeStreamFlux<T>(private val delegate: ChangeStreamPublisher<T>) : Flux
     override fun first(): Mono<ChangeStreamDocument<T>> = delegate.first().toMono()
 
     override fun subscribe(actual: CoreSubscriber<in ChangeStreamDocument<T>>) {
-        return delegate.toReactor().subscribe(actual)
+        return delegate.subscribe(actual)
     }
 }

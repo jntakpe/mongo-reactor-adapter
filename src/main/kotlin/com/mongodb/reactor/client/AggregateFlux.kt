@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.toMono
 import java.util.concurrent.TimeUnit
 
-class AggregateFlux<T>(private val delegate: AggregatePublisher<T>) : Flux<T>(), AggregatePublisher<T> {
+public class AggregateFlux<T>(private val delegate: AggregatePublisher<T>) : Flux<T>(), AggregatePublisher<T> {
 
     override fun allowDiskUse(allowDiskUse: Boolean?): AggregateFlux<T> = delegate.allowDiskUse(allowDiskUse).toReactor()
 
@@ -36,6 +36,6 @@ class AggregateFlux<T>(private val delegate: AggregatePublisher<T>) : Flux<T>(),
     override fun first(): Mono<T> = delegate.first().toMono()
 
     override fun subscribe(actual: CoreSubscriber<in T>) {
-        delegate.toReactor().subscribe(actual)
+        delegate.subscribe(actual)
     }
 }
