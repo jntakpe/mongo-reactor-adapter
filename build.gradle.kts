@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 val reactorVersion: String by project
 val mongoDriverVersion: String by project
 val junitVersion: String by project
@@ -26,6 +28,7 @@ dependencies {
     implementation(kotlin("stdlib"))
     testImplementation(kotlin("reflect"))
     testImplementation(platform("org.junit:junit-bom:$junitVersion"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.junit.jupiter:junit-jupiter-params")
     testImplementation("io.mockk:mockk:$mockkVersion")
     testImplementation("io.projectreactor:reactor-test")
@@ -36,6 +39,7 @@ dependencies {
 }
 
 java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
     withSourcesJar()
     withJavadocJar()
 }
@@ -47,6 +51,9 @@ kotlin {
 tasks {
     test {
         useJUnitPlatform()
+    }
+    withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 
