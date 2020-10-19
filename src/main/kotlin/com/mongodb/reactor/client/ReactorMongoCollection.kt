@@ -125,7 +125,7 @@ public class ReactorMongoCollection<T>(private val delegate: MongoCollection<T>)
         return delegate.find(clientSession, filter, clazz).toReactor()
     }
 
-    override fun aggregate(pipeline: List<Bson>) = delegate.aggregate(pipeline).toReactor()
+    override fun aggregate(pipeline: List<Bson>): AggregateFlux<T> = delegate.aggregate(pipeline).toReactor()
 
     override fun <TResult : Any> aggregate(pipeline: List<Bson>, clazz: Class<TResult>): AggregateFlux<TResult> {
         return delegate.aggregate(pipeline, clazz).toReactor()
