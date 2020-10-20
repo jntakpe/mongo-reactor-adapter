@@ -48,6 +48,9 @@ tasks {
     withType<KotlinCompile> {
         kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+    test {
+        useJUnitPlatform()
+    }
 }
 
 publishing {
