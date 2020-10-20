@@ -1,36 +1,39 @@
-package com.mongodb.reactor.client.sample.java.springboot;
+package com.mongodb.client.reactor.sample.java.micronaut;
 
 import com.mongodb.reactivestreams.client.MongoClient;
 import com.mongodb.reactivestreams.client.MongoCollection;
+import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
+import io.micronaut.test.support.TestPropertyProvider;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
+import org.junit.jupiter.api.TestInstance;
 import org.testcontainers.containers.MongoDBContainer;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
-class SampleServiceTest {
+@MicronautTest
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+class SampleServiceTest implements TestPropertyProvider {
 
     private static final String DB_NAME = "test";
 
     private static final MongoDBContainer container = initContainer();
 
-    @Autowired
+    @Inject
     private SampleService service;
 
-    @Autowired
+    @Inject
     private MongoClient client;
 
     static MongoDBContainer initContainer() {
@@ -39,9 +42,9 @@ class SampleServiceTest {
         return container;
     }
 
-    @DynamicPropertySource
-    static void databaseProperties(DynamicPropertyRegistry registry) {
-        registry.add("spring.data.mongodb.port", container::getFirstMappedPort);
+    @Override
+    public Map<String, String> getProperties() {
+        return Collections.singletonMap("MONGO_PORT", container.getFirstMappedPort().toString());
     }
 
     @BeforeEach
@@ -97,4 +100,5 @@ class SampleServiceTest {
                     .consumeNextWith(u -> assertThat(u).usingRecursiveComparison().isEqualTo(user))
                     .verifyComplete();
     }
+
 }

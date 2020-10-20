@@ -3,6 +3,7 @@ import io.micronaut.gradle.MicronautTestRuntime.JUNIT_5
 
 val reactorVersion: String by project
 val testContainersVersion: String by project
+val assertJVersion: String by project
 
 plugins {
     java
@@ -20,13 +21,14 @@ micronaut {
 }
 
 dependencies {
+    implementation(project(":library"))
     implementation(platform("io.projectreactor:reactor-bom:$reactorVersion"))
     implementation("io.micronaut:micronaut-validation")
     implementation("io.micronaut:micronaut-runtime")
     implementation("io.micronaut.mongodb:micronaut-mongo-reactive")
     testImplementation("io.projectreactor:reactor-test")
+    testImplementation("org.assertj:assertj-core:$assertJVersion")
     testImplementation("org.testcontainers:testcontainers:$testContainersVersion")
-    testImplementation("org.testcontainers:junit-jupiter:$testContainersVersion")
     testImplementation("org.testcontainers:mongodb:$testContainersVersion")
 }
 
