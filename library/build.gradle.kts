@@ -24,7 +24,6 @@ dependencies {
     implementation(kotlin("stdlib"))
     testImplementation(kotlin("reflect"))
     testImplementation(platform("org.junit:junit-bom:$junitVersion"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.junit.jupiter:junit-jupiter-params")
     testImplementation("io.mockk:mockk:$mockkVersion")
     testImplementation("io.projectreactor:reactor-test")
@@ -32,6 +31,7 @@ dependencies {
     testImplementation("org.testcontainers:testcontainers:$testContainersVersion")
     testImplementation("org.testcontainers:junit-jupiter:$testContainersVersion")
     testImplementation("org.testcontainers:mongodb:$testContainersVersion")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
 
 java {
