@@ -31,9 +31,17 @@ import com.mongodb.reactivestreams.client.MongoCollection
 import org.bson.Document
 import org.bson.codecs.configuration.CodecRegistry
 import org.bson.conversions.Bson
+import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.toMono
 
+/**
+ * Wraps MongoDB's reactivestreams driver [ReactorMongoCollection] class.
+ * Delegates every call to the original MongoDB's reactivestreams driver class but transform ReactiveStream's Publisher return types
+ * into either [Flux] or [Mono].
+ * @param delegate original MongoDB's reactivestreams driver class to which all the calls are delegated
+ * @see ReactorMongoCollection
+ */
 public class ReactorMongoCollection<T>(private val delegate: MongoCollection<T>) : MongoCollection<T> by delegate {
 
     override fun <NewTDocument : Any> withDocumentClass(clazz: Class<NewTDocument>): ReactorMongoCollection<NewTDocument> {

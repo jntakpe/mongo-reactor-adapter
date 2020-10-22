@@ -11,6 +11,13 @@ import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.toFlux
 import reactor.kotlin.core.publisher.toMono
 
+/**
+ * Wraps MongoDB's reactivestreams driver [MongoClient] class.
+ * Delegates every call to the original MongoDB's reactivestreams driver class but transform ReactiveStream's Publisher return types
+ * into either [Flux] or [Mono].
+ * @param delegate original MongoDB's reactivestreams driver class to which all the calls are delegated
+ * @see MongoClient
+ */
 public class ReactorMongoClient(private val delegate: MongoClient) : MongoClient by delegate {
 
     override fun getDatabase(name: String): ReactorMongoDatabase = ReactorMongoDatabase(delegate.getDatabase(name))

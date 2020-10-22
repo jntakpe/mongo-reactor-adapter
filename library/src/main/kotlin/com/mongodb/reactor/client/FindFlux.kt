@@ -10,6 +10,15 @@ import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.toMono
 import java.util.concurrent.TimeUnit
 
+/**
+ * Wraps MongoDB's reactivestreams driver [FindFlux] class into a Reactor's [Flux] child class.
+ * Delegates every call to the original MongoDB's reactivestreams driver class but transform ReactiveStream's Publisher return types
+ * into either [Flux] or [Mono].
+ * @param T the type of the result
+ * @param delegate original MongoDB's reactivestreams driver class to which all the calls are delegated
+ * @see Flux
+ * @see FindFlux
+ */
 public class FindFlux<T>(private val delegate: FindPublisher<T>) : Flux<T>(), FindPublisher<T> {
 
     override fun first(): Mono<T> = delegate.first().toMono()

@@ -12,6 +12,15 @@ import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.toMono
 import java.util.concurrent.TimeUnit
 
+/**
+ * Wraps MongoDB's reactivestreams driver [ChangeStreamPublisher] class into a Reactor's [Flux] child class.
+ * Delegates every call to the original MongoDB's reactivestreams driver class but transform ReactiveStream's Publisher return types
+ * into either [Flux] or [Mono].
+ * @param T the type of the result
+ * @param delegate original MongoDB's reactivestreams driver class to which all the calls are delegated
+ * @see Flux
+ * @see ChangeStreamPublisher
+ */
 public class ChangeStreamFlux<T>(private val delegate: ChangeStreamPublisher<T>) : Flux<ChangeStreamDocument<T>>(),
                                                                                    ChangeStreamPublisher<T> {
 
