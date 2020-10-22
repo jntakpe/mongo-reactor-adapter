@@ -23,3 +23,7 @@ tasks {
     }
 }
 
+springBoot {
+    mainClassName = "com.mongodb.reactor.client.sample.java.springboot.JavaSpringBoot"
+}
+

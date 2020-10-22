@@ -32,3 +32,7 @@ tasks {
         }
     }
 }
+
+springBoot {
+    mainClassName = "com.mongodb.reactor.client.sample.kotlin.springboot.JavaSpringBoot"
+}
