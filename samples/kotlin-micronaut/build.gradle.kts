@@ -28,7 +28,7 @@ micronaut {
 dependencies {
     kapt(platform("io.micronaut:micronaut-bom"))
     kapt("io.micronaut:micronaut-inject-java")
-    implementation(project(":library"))
+    implementation(project(":mongo-reactor-adapter"))
     implementation(platform("io.projectreactor:reactor-bom:$reactorVersion"))
     implementation(kotlin("stdlib"))
     implementation("io.micronaut:micronaut-validation")

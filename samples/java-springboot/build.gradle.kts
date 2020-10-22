@@ -8,7 +8,7 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":library"))
+    implementation(project(":mongo-reactor-adapter"))
     implementation(platform(SpringBootPlugin.BOM_COORDINATES))
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     testImplementation("org.springframework.boot:spring-boot-starter-test")

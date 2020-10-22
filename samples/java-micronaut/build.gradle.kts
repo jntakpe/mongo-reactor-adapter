@@ -21,7 +21,7 @@ micronaut {
 }
 
 dependencies {
-    implementation(project(":library"))
+    implementation(project(":mongo-reactor-adapter"))
     implementation(platform("io.projectreactor:reactor-bom:$reactorVersion"))
     implementation("io.micronaut:micronaut-validation")
     implementation("io.micronaut:micronaut-runtime")
