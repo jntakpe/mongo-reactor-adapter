@@ -9,6 +9,7 @@ val testContainersVersion: String by project
 
 plugins {
     kotlin("jvm") version "1.4.10"
+    id("org.jetbrains.dokka") version "1.4.10.2"
     `java-library`
     `maven-publish`
 }
@@ -50,6 +51,13 @@ tasks {
     }
     test {
         useJUnitPlatform()
+    }
+    dokkaJavadoc.configure {
+        outputDirectory.set(buildDir.resolve("javadoc"))
+    }
+    javadoc {
+        dependsOn(dokkaJavadoc)
+        setDestinationDir(buildDir.resolve("javadoc"))
     }
 }
 
