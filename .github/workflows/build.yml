@@ -1,0 +1,19 @@
+name: build
+on: [ push, pull_request ]
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+      - name: Configure JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 8
+      - name: Build artifacts
+        run: ./gradlew assemble
+      - name: Run test suite
+        run: ./gradlew check
