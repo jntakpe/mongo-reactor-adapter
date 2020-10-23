@@ -1,7 +1,7 @@
 name: build
 on: [ push, pull_request ]
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
@@ -13,7 +13,13 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 8
+      - name: Cache Gradle packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: ${{ runner.os }}-gradle
       - name: Build artifacts
-        run: ./gradlew assemble
+        run: ./gradlew -p library assemble
       - name: Run test suite
-        run: ./gradlew check
+        run: ./gradlew -p library check
