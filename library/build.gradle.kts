@@ -65,6 +65,28 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             from(components.findByName("java"))
+            pom {
+                name.set(project.name)
+                description.set("MongoDB's Reactor adapter for ReactiveStreams driver")
+                url.set("https://github.com/jntakpe/mongo-reactor-adapter")
+                licenses {
+                    license {
+                        name.set("MIT License")
+                        url.set("https://opensource.org/licenses/MIT")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("jntakpe")
+                        name.set("Jocelyn NTAKPE")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:git@github.com:jntakpe/mongo-reactor-adapter.git")
+                    developerConnection.set("scm:git:git@github.com:jntakpe/mongo-reactor-adapter.git")
+                    url.set("https://github.com/jntakpe/mongo-reactor-adapter/")
+                }
+            }
         }
     }
 }
