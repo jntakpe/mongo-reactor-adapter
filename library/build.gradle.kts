@@ -13,6 +13,7 @@ plugins {
     `java-library`
     `maven-publish`
     signing
+    jacoco
 }
 
 group = "com.github.jntakpe"
@@ -59,6 +60,15 @@ tasks {
     javadoc {
         dependsOn(dokkaJavadoc)
         setDestinationDir(buildDir.resolve("javadoc"))
+    }
+    jacocoTestReport {
+        dependsOn(test)
+        reports {
+            xml.isEnabled = true
+        }
+    }
+    check {
+        dependsOn(jacocoTestReport)
     }
 }
 
