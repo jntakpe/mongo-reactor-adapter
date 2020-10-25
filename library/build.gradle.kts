@@ -17,7 +17,7 @@ plugins {
 }
 
 group = "com.github.jntakpe"
-version = "0.1.1"
+version = "0.1.2-RC1"
 
 dependencies {
     api(platform("io.projectreactor:reactor-bom:$reactorVersion"))
@@ -122,5 +122,10 @@ publishing {
 }
 
 signing {
+    if ("CI" in System.getenv()) {
+        val signingKey: String? by project
+        val signingKeyPassword: String? by project
+        useInMemoryPgpKeys(signingKey, signingKeyPassword)
+    }
     sign(publishing.publications["mavenJava"])
 }
