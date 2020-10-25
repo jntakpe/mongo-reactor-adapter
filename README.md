@@ -1,3 +1,8 @@
+![build](https://github.com/jntakpe/mongo-reactor-adapter/workflows/build/badge.svg) 
+[![codecov](https://codecov.io/gh/jntakpe/mongo-reactor-adapter/branch/master/graph/badge.svg?token=5YCPKI2X1K)]() 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.jntakpe/mongo-reactor-adapter/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.jntakpe/mongo-reactor-adapter)
+![license](https://img.shields.io/github/license/jntakpe/mongo-reactor-adapter)
+
 # Java MongoDB's Reactor adapter
 
 Simple yet effective [Reactor](https://projectreactor.io) adapter for MongoDB's 
