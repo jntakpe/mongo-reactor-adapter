@@ -12,6 +12,7 @@ plugins {
     id("org.jetbrains.dokka") version "1.4.10.2"
     `java-library`
     `maven-publish`
+    signing
 }
 
 group = "com.github.jntakpe"
@@ -63,7 +64,7 @@ tasks {
 
 publishing {
     publications {
-        create<MavenPublication>("maven") {
+        create<MavenPublication>("mavenJava") {
             from(components.findByName("java"))
             pom {
                 name.set(project.name)
@@ -89,4 +90,8 @@ publishing {
             }
         }
     }
+}
+
+signing {
+    sign(publishing.publications["mavenJava"])
 }
