@@ -1,5 +1,5 @@
 ![build](https://github.com/jntakpe/mongo-reactor-adapter/workflows/build/badge.svg) 
-[![codecov](https://codecov.io/gh/jntakpe/mongo-reactor-adapter/branch/master/graph/badge.svg?token=5YCPKI2X1K)]() 
+[![codecov](https://codecov.io/gh/jntakpe/mongo-reactor-adapter/branch/master/graph/badge.svg?token=5YCPKI2X1K)](https://codecov.io/gh/jntakpe/mongo-reactor-adapter) 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.jntakpe/mongo-reactor-adapter/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.jntakpe/mongo-reactor-adapter)
 ![license](https://img.shields.io/github/license/jntakpe/mongo-reactor-adapter)
 
