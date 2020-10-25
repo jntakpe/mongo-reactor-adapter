@@ -3,7 +3,6 @@ on: [ push, pull_request ]
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -25,3 +24,10 @@ jobs:
         run: ./gradlew -p library assemble
       - name: Run test suite
         run: ./gradlew -p library check
+      - name: Code coverage
+        uses: codecov/codecov-action@v1
+        with:
+          file: ./library/build/reports/jacoco/test/jacocoTestReport.xml
+          fail_ci_if_error: true
+          verbose: false
+
