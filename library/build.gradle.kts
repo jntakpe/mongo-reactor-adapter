@@ -90,6 +90,25 @@ publishing {
             }
         }
     }
+    repositories {
+        maven {
+            fun repositoryUrl(): String {
+                val repositoryBase = "https://oss.sonatype.org"
+                return if (project.version.toString().endsWith("SNAPSHOT")) {
+                    "$repositoryBase/content/repositories/snapshots"
+                } else {
+                    "$repositoryBase/service/local/staging/deploy/maven2"
+                }
+            }
+            setUrl(repositoryUrl())
+            credentials {
+                val sonatypeUsername: String? by extra
+                val sonatypePassword: String? by extra
+                username = sonatypeUsername
+                password = sonatypePassword
+            }
+        }
+    }
 }
 
 signing {
