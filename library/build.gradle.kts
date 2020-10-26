@@ -112,8 +112,8 @@ publishing {
             }
             setUrl(repositoryUrl())
             credentials {
-                val sonatypeUsername: String? by extra
-                val sonatypePassword: String? by extra
+                val sonatypeUsername: String? by project
+                val sonatypePassword: String? by project
                 username = sonatypeUsername
                 password = sonatypePassword
             }
