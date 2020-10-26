@@ -17,7 +17,7 @@ plugins {
 }
 
 group = "com.github.jntakpe"
-version = "0.1.2-RC4"
+version = "0.1.2-RC5"
 
 dependencies {
     api(platform("io.projectreactor:reactor-bom:$reactorVersion"))
@@ -110,7 +110,7 @@ publishing {
     }
     repositories {
         maven {
-            name = "Maven central"
+            name = "Maven_central"
             setUrl("https://oss.sonatype.org/service/local/staging/deploy/maven2")
             credentials {
                 val sonatypeUsername: String? by project
@@ -120,7 +120,7 @@ publishing {
             }
         }
         maven {
-            name = "Github packages"
+            name = "Github_packages"
             setUrl("https://maven.pkg.github.com/jntakpe/mongo-reactor-adapter")
             credentials {
                 val githubActor: String? by project
