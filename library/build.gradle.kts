@@ -17,7 +17,7 @@ plugins {
 }
 
 group = "com.github.jntakpe"
-version = "0.1.2-RC5"
+version = "0.1.2"
 
 dependencies {
     api(platform("io.projectreactor:reactor-bom:$reactorVersion"))
