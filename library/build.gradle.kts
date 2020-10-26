@@ -92,6 +92,14 @@ publishing {
                         name.set("Jocelyn NTAKPE")
                     }
                 }
+                issueManagement {
+                    system.set("Github issues")
+                    url.set("https://github.com/jntakpe/mongo-reactor-adapter/issues")
+                }
+                ciManagement {
+                    system.set("Github actions")
+                    url.set("https://github.com/jntakpe/mongo-reactor-adapter/actions")
+                }
                 scm {
                     connection.set("scm:git:git@github.com:jntakpe/mongo-reactor-adapter.git")
                     developerConnection.set("scm:git:git@github.com:jntakpe/mongo-reactor-adapter.git")
