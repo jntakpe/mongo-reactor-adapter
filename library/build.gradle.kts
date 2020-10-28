@@ -22,9 +22,8 @@ version = "0.1.3"
 dependencies {
     api(platform("io.projectreactor:reactor-bom:$reactorVersion"))
     api("io.projectreactor:reactor-core")
-    api("io.projectreactor.kotlin:reactor-kotlin-extensions")
     api("org.mongodb:mongodb-driver-reactivestreams:$mongoDriverVersion")
-    implementation(kotlin("stdlib"))
+    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     testImplementation(kotlin("reflect"))
     testImplementation(platform("org.junit:junit-bom:$junitVersion"))
     testImplementation("org.junit.jupiter:junit-jupiter-params")
