@@ -18,7 +18,7 @@ import com.mongodb.reactivestreams.client.MongoDatabase
  * @param T the type of the result
  * @return Reactor wrapper for [AggregatePublisher]
  */
-public fun <T> AggregatePublisher<T>.toReactor(): AggregateFlux<T> = this as? AggregateFlux<T> ?: AggregateFlux(this)
+public fun <T> AggregatePublisher<T>.toReactor(): AggregateFlux<T> = intoReactor(::AggregateFlux)
 
 /**
  * Extension that wraps MongoDB's [ChangeStreamPublisher] of [T] into an [ChangeStreamFlux] wrapper class
@@ -26,7 +26,7 @@ public fun <T> AggregatePublisher<T>.toReactor(): AggregateFlux<T> = this as? Ag
  * @param T the type of the result
  * @return Reactor wrapper for [ChangeStreamPublisher]
  */
-public fun <T> ChangeStreamPublisher<T>.toReactor(): ChangeStreamFlux<T> = this as? ChangeStreamFlux<T> ?: ChangeStreamFlux(this)
+public fun <T> ChangeStreamPublisher<T>.toReactor(): ChangeStreamFlux<T> = intoReactor(::ChangeStreamFlux)
 
 /**
  * Extension that wraps MongoDB's [DistinctPublisher] of [T] into an [DistinctFlux] wrapper class
@@ -34,7 +34,7 @@ public fun <T> ChangeStreamPublisher<T>.toReactor(): ChangeStreamFlux<T> = this 
  * @param T the type of the result
  * @return Reactor wrapper for [DistinctPublisher]
  */
-public fun <T> DistinctPublisher<T>.toReactor(): DistinctFlux<T> = this as? DistinctFlux<T> ?: DistinctFlux(this)
+public fun <T> DistinctPublisher<T>.toReactor(): DistinctFlux<T> = intoReactor(::DistinctFlux)
 
 /**
  * Extension that wraps MongoDB's [FindPublisher] of [T] into an [FindFlux] wrapper class
@@ -42,7 +42,7 @@ public fun <T> DistinctPublisher<T>.toReactor(): DistinctFlux<T> = this as? Dist
  * @param T the type of the result
  * @return Reactor wrapper for [FindPublisher]
  */
-public fun <T> FindPublisher<T>.toReactor(): FindFlux<T> = this as? FindFlux<T> ?: FindFlux(this)
+public fun <T> FindPublisher<T>.toReactor(): FindFlux<T> = intoReactor(::FindFlux)
 
 /**
  * Extension that wraps MongoDB's [ListCollectionsPublisher] of [T] into an [ListCollectionFlux] wrapper class
@@ -50,7 +50,7 @@ public fun <T> FindPublisher<T>.toReactor(): FindFlux<T> = this as? FindFlux<T> 
  * @param T the type of the result
  * @return Reactor wrapper for [ListCollectionsPublisher]
  */
-public fun <T> ListCollectionsPublisher<T>.toReactor(): ListCollectionFlux<T> = this as? ListCollectionFlux<T> ?: ListCollectionFlux(this)
+public fun <T> ListCollectionsPublisher<T>.toReactor(): ListCollectionFlux<T> = intoReactor(::ListCollectionFlux)
 
 /**
  * Extension that wraps MongoDB's [ListDatabasesPublisher] of [T] into an [ListDatabaseFlux] wrapper class
@@ -58,7 +58,7 @@ public fun <T> ListCollectionsPublisher<T>.toReactor(): ListCollectionFlux<T> = 
  * @param T the type of the result
  * @return Reactor wrapper for [ListDatabasesPublisher]
  */
-public fun <T> ListDatabasesPublisher<T>.toReactor(): ListDatabaseFlux<T> = this as? ListDatabaseFlux<T> ?: ListDatabaseFlux(this)
+public fun <T> ListDatabasesPublisher<T>.toReactor(): ListDatabaseFlux<T> = intoReactor(::ListDatabaseFlux)
 
 /**
  * Extension that wraps MongoDB's [ListIndexesPublisher] of [T] into an [ListIndexesFlux] wrapper class
@@ -66,7 +66,7 @@ public fun <T> ListDatabasesPublisher<T>.toReactor(): ListDatabaseFlux<T> = this
  * @param T the type of the result
  * @return Reactor wrapper for [ListIndexesPublisher]
  */
-public fun <T> ListIndexesPublisher<T>.toReactor(): ListIndexesFlux<T> = this as? ListIndexesFlux<T> ?: ListIndexesFlux(this)
+public fun <T> ListIndexesPublisher<T>.toReactor(): ListIndexesFlux<T> = intoReactor(::ListIndexesFlux)
 
 /**
  * Extension that wraps MongoDB's [MapReducePublisher] of [T] into an [MapReduceFlux] wrapper class
@@ -74,27 +74,27 @@ public fun <T> ListIndexesPublisher<T>.toReactor(): ListIndexesFlux<T> = this as
  * @param T the type of the result
  * @return Reactor wrapper for [MapReducePublisher]
  */
-public fun <T> MapReducePublisher<T>.toReactor(): MapReduceFlux<T> = this as? MapReduceFlux<T> ?: MapReduceFlux(this)
+public fun <T> MapReducePublisher<T>.toReactor(): MapReduceFlux<T> = intoReactor(::MapReduceFlux)
 
 /**
  * Extension that wraps MongoDB's [MongoCollection] of [T] into an [ReactorMongoCollection] wrapper class
  * @receiver MongoDB's reactivestreams driver collection class
  * @return Reactor wrapper for [MongoCollection]
  */
-public fun <T> MongoCollection<T>.toReactor(): ReactorMongoCollection<T> {
-    return this as? ReactorMongoCollection<T> ?: ReactorMongoCollection(this)
-}
+public fun <T> MongoCollection<T>.toReactor(): ReactorMongoCollection<T> = intoReactor(::ReactorMongoCollection)
 
 /**
  * Extension that wraps MongoDB's [MongoDatabase] into an [ReactorMongoDatabase] wrapper class
  * @receiver MongoDB's reactivestreams driver database class
  * @return Reactor wrapper for [MongoDatabase]
  */
-public fun MongoDatabase.toReactor(): ReactorMongoDatabase = this as? ReactorMongoDatabase ?: ReactorMongoDatabase(this)
+public fun MongoDatabase.toReactor(): ReactorMongoDatabase = intoReactor(::ReactorMongoDatabase)
 
 /**
  * Extension that wraps MongoDB's [MongoClient] into an [ReactorMongoClient] wrapper class
  * @receiver MongoDB's reactivestreams driver client class
  * @return Reactor wrapper for [MongoClient]
  */
-public fun MongoClient.toReactor(): ReactorMongoClient = this as? ReactorMongoClient ?: ReactorMongoClient(this)
+public fun MongoClient.toReactor(): ReactorMongoClient = intoReactor(::ReactorMongoClient)
+
+private inline fun <R, reified T> R.intoReactor(ctor: (R) -> T) : T = this as? T ?: ctor(this)
