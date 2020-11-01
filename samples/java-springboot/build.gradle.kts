@@ -4,7 +4,7 @@ val testContainersVersion: String by project
 
 plugins {
     java
-    id("org.springframework.boot") version "2.3.4.RELEASE"
+    id("org.springframework.boot") version "2.3.5.RELEASE"
 }
 
 dependencies {
