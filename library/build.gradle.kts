@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val reactorVersion: String by project
 val mongoDriverVersion: String by project
-val braveVersion: String by project
 val junitVersion: String by project
 val mockkVersion: String by project
 val assertJVersion: String by project
@@ -17,16 +16,11 @@ plugins {
     jacoco
 }
 
-group = "com.github.jntakpe"
-version = "0.1.4"
-
 dependencies {
     api(platform("io.projectreactor:reactor-bom:$reactorVersion"))
-    implementation(platform("io.zipkin.brave:brave-bom:$braveVersion"))
     api("io.projectreactor:reactor-core")
     api("org.mongodb:mongodb-driver-reactivestreams:$mongoDriverVersion")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
-    compileOnly("io.zipkin.brave:brave")
     testImplementation(kotlin("reflect"))
     testImplementation(platform("org.junit:junit-bom:$junitVersion"))
     testImplementation("org.junit.jupiter:junit-jupiter-params")
