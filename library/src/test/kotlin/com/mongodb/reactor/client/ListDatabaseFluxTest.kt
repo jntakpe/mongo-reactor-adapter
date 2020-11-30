@@ -10,7 +10,7 @@ import org.bson.Document
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import reactor.core.publisher.DirectProcessor
+import reactor.core.publisher.Operators
 import reactor.kotlin.test.test
 import java.util.concurrent.TimeUnit
 
@@ -39,8 +39,8 @@ internal class ListDatabaseFluxTest {
         flux.authorizedDatabasesOnly(true)
         flux.batchSize(10)
         flux.first()
-        val processor = DirectProcessor.create<Document>()
-        flux.subscribe(processor)
+        val subscriber = Operators.emptySubscriber<Document>()
+        flux.subscribe(subscriber)
         verifyAll {
             publisher.filter(document)
             publisher.maxTime(10, TimeUnit.SECONDS)
@@ -48,7 +48,7 @@ internal class ListDatabaseFluxTest {
             publisher.authorizedDatabasesOnly(true)
             publisher.batchSize(10)
             publisher.first()
-            publisher.subscribe(processor)
+            publisher.subscribe(subscriber)
         }
         confirmVerified(publisher)
     }

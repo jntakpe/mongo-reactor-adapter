@@ -12,7 +12,7 @@ import org.bson.Document
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import reactor.core.publisher.DirectProcessor
+import reactor.core.publisher.Operators
 import reactor.kotlin.test.test
 import java.util.concurrent.TimeUnit
 
@@ -60,8 +60,8 @@ internal class FindFluxTest {
         flux.showRecordId(true)
         flux.batchSize(10)
         flux.allowDiskUse(true)
-        val processor = DirectProcessor.create<Document>()
-        flux.subscribe(processor)
+        val subscriber = Operators.emptySubscriber<Document>()
+        flux.subscribe(subscriber)
         verifyAll {
             publisher.first()
             publisher.filter(document)
@@ -85,7 +85,7 @@ internal class FindFluxTest {
             publisher.showRecordId(true)
             publisher.batchSize(10)
             publisher.allowDiskUse(true)
-            publisher.subscribe(processor)
+            publisher.subscribe(subscriber)
         }
         confirmVerified(publisher)
     }

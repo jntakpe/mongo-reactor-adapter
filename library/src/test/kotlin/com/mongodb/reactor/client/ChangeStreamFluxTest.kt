@@ -14,7 +14,7 @@ import org.bson.Document
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import reactor.core.publisher.DirectProcessor
+import reactor.core.publisher.Operators
 import reactor.kotlin.core.publisher.toMono
 import reactor.kotlin.test.test
 import java.time.Duration
@@ -50,8 +50,8 @@ internal class ChangeStreamFluxTest {
         flux.withDocumentClass(String::class.java)
         flux.batchSize(10)
         flux.first()
-        val processor = DirectProcessor.create<ChangeStreamDocument<Document>>()
-        flux.subscribe(processor)
+        val subscriber = Operators.emptySubscriber<ChangeStreamDocument<Document>>()
+        flux.subscribe(subscriber)
         verifyAll {
             publisher.fullDocument(FullDocument.DEFAULT)
             publisher.resumeAfter(document)
@@ -62,7 +62,7 @@ internal class ChangeStreamFluxTest {
             publisher.withDocumentClass(String::class.java)
             publisher.batchSize(10)
             publisher.first()
-            publisher.subscribe(processor)
+            publisher.subscribe(subscriber)
         }
         confirmVerified(publisher)
     }
