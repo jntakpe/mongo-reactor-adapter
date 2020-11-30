@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit
  * @see Flux
  * @see MapReducePublisher
  */
-public class MapReduceFlux<T>(private val delegate: MapReducePublisher<T>) : Flux<T>(), MapReducePublisher<T> {
+public open class MapReduceFlux<T>(private val delegate: MapReducePublisher<T>) : Flux<T>(), MapReducePublisher<T> {
 
     override fun collectionName(collectionName: String): MapReduceFlux<T> = delegate.collectionName(collectionName).toReactor()
 

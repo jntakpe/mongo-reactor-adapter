@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit
  * @see Flux
  * @see FindFlux
  */
-public class FindFlux<T>(private val delegate: FindPublisher<T>) : Flux<T>(), FindPublisher<T> {
+public open class FindFlux<T>(private val delegate: FindPublisher<T>) : Flux<T>(), FindPublisher<T> {
 
     override fun first(): Mono<T> = delegate.first().toMono()
 

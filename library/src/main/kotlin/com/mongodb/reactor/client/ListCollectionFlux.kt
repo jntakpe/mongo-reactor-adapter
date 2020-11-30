@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit
  * @see Flux
  * @see ListCollectionsPublisher
  */
-public class ListCollectionFlux<T>(private val delegate: ListCollectionsPublisher<T>) : Flux<T>(), ListCollectionsPublisher<T> {
+public open class ListCollectionFlux<T>(private val delegate: ListCollectionsPublisher<T>) : Flux<T>(), ListCollectionsPublisher<T> {
 
     override fun filter(filter: Bson?): ListCollectionFlux<T> = delegate.filter(filter).toReactor()
 

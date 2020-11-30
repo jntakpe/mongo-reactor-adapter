@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit
  * @see Flux
  * @see AggregatePublisher
  */
-public class AggregateFlux<T>(private val delegate: AggregatePublisher<T>) : Flux<T>(), AggregatePublisher<T> {
+public open class AggregateFlux<T>(private val delegate: AggregatePublisher<T>) : Flux<T>(), AggregatePublisher<T> {
 
     override fun allowDiskUse(allowDiskUse: Boolean?): AggregateFlux<T> = delegate.allowDiskUse(allowDiskUse).toReactor()
 

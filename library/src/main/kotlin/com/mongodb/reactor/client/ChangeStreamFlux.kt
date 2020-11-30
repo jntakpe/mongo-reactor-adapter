@@ -21,8 +21,8 @@ import java.util.concurrent.TimeUnit
  * @see Flux
  * @see ChangeStreamPublisher
  */
-public class ChangeStreamFlux<T>(private val delegate: ChangeStreamPublisher<T>) : Flux<ChangeStreamDocument<T>>(),
-                                                                                   ChangeStreamPublisher<T> {
+public open class ChangeStreamFlux<T>(private val delegate: ChangeStreamPublisher<T>) : Flux<ChangeStreamDocument<T>>(),
+                                                                                        ChangeStreamPublisher<T> {
 
     override fun fullDocument(fullDocument: FullDocument): ChangeStreamFlux<T> = delegate.fullDocument(fullDocument).toReactor()
 

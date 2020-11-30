@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit
  * @see Flux
  * @see ListIndexesPublisher
  */
-public class ListIndexesFlux<T>(private val delegate: ListIndexesPublisher<T>) : Flux<T>(), ListIndexesPublisher<T> {
+public open class ListIndexesFlux<T>(private val delegate: ListIndexesPublisher<T>) : Flux<T>(), ListIndexesPublisher<T> {
 
     override fun maxTime(maxTime: Long, timeUnit: TimeUnit): ListIndexesFlux<T> = delegate.maxTime(maxTime, timeUnit).toReactor()
 

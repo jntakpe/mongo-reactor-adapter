@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit
  * @see Flux
  * @see DistinctPublisher
  */
-public class DistinctFlux<T>(private val delegate: DistinctPublisher<T>) : Flux<T>(), DistinctPublisher<T> {
+public open class DistinctFlux<T>(private val delegate: DistinctPublisher<T>) : Flux<T>(), DistinctPublisher<T> {
 
     override fun filter(filter: Bson?): DistinctFlux<T> = delegate.filter(filter).toReactor()
 

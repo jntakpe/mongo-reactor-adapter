@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit
  * @see Flux
  * @see ListDatabasesPublisher
  */
-public class ListDatabaseFlux<T>(private val delegate: ListDatabasesPublisher<T>) : Flux<T>(), ListDatabasesPublisher<T> {
+public open class ListDatabaseFlux<T>(private val delegate: ListDatabasesPublisher<T>) : Flux<T>(), ListDatabasesPublisher<T> {
 
     override fun filter(filter: Bson?): ListDatabaseFlux<T> = delegate.filter(filter).toReactor()
 
