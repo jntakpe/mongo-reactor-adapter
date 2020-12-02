@@ -58,8 +58,6 @@ internal class TracingMapReduceFluxTest {
         tracingFlux.collation(collation)
         tracingFlux.batchSize(10)
         tracingFlux.first()
-        val subscriber = Operators.emptySubscriber<Document>()
-        tracingFlux.subscribe(subscriber)
         verifyAll {
             publisher.collectionName(MongoContainer.COLLECTION_NAME)
             publisher.finalizeFunction(finalizeFunction)
@@ -79,7 +77,6 @@ internal class TracingMapReduceFluxTest {
             publisher.collation(collation)
             publisher.batchSize(10)
             publisher.first()
-            publisher.subscribe(subscriber)
         }
         confirmVerified(publisher)
     }
