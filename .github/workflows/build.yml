@@ -31,7 +31,7 @@ jobs:
       - name: Run library test suite
         run: ./gradlew -p library check
       - name: Build tracing artifacts
-          run: ./gradlew -p tracing assemble
+        run: ./gradlew -p tracing assemble
       - name: Run tracing test suite
         run: ./gradlew -p tracing check
       - name: Code coverage
