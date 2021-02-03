@@ -6,8 +6,8 @@ val kMongoVersion: String = "4.2.4"
 
 plugins {
     kotlin("jvm") version "1.4.30"
-    kotlin("plugin.spring") version "1.3.72"
-    id("org.springframework.boot") version "2.3.5.RELEASE"
+    kotlin("plugin.spring") version "1.4.30"
+    id("org.springframework.boot") version "2.4.2"
 }
 
 dependencies {
@@ -35,5 +35,5 @@ tasks {
 }
 
 springBoot {
-    mainClassName = "com.mongodb.reactor.client.sample.kotlin.springboot.JavaSpringBoot"
+    mainClass.set("com.mongodb.reactor.client.sample.kotlin.springboot.JavaSpringBoot")
 }

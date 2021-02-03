@@ -4,7 +4,7 @@ val testContainersVersion: String by project
 
 plugins {
     java
-    id("org.springframework.boot") version "2.3.5.RELEASE"
+    id("org.springframework.boot") version "2.4.2"
 }
 
 dependencies {
@@ -24,6 +24,6 @@ tasks {
 }
 
 springBoot {
-    mainClassName = "com.mongodb.reactor.client.sample.java.springboot.JavaSpringBoot"
+    mainClass.set("com.mongodb.reactor.client.sample.java.springboot.JavaSpringBoot")
 }
 
