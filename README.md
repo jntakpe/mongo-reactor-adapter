@@ -21,22 +21,23 @@ Add this dependency to your project's build file :
 ###### Groovy script
 
 ````groovy
-implementation "com.github.jntakpe:mongo-reactor-adapter:0.1.4"
+implementation "com.github.jntakpe:mongo-reactor-adapter:0.2.0-RC4"
 ````
 
 ###### Kotlin script
 
 ```kotlin
-implementation("com.github.jntakpe:mongo-reactor-adapter:0.1.4")
+implementation("com.github.jntakpe:mongo-reactor-adapter:0.2.0-RC4")
 ```
 
 ### Maven users
 
 ```xml
+
 <dependency>
-  <groupId>com.github.jntakpe</groupId>
-  <artifactId>mongo-reactor-adapter</artifactId>
-  <version>0.1.4</version>
+    <groupId>com.github.jntakpe</groupId>
+    <artifactId>mongo-reactor-adapter</artifactId>
+    <version>0.2.0-RC4</version>
 </dependency>
 ```
 
