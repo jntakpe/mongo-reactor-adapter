@@ -1,7 +1,9 @@
 package com.mongodb.reactor.client
 
+import com.mongodb.ExplainVerbosity
 import com.mongodb.client.model.Collation
 import com.mongodb.reactivestreams.client.AggregatePublisher
+import org.bson.Document
 import org.bson.conversions.Bson
 import reactor.core.CoreSubscriber
 import reactor.core.publisher.Flux
@@ -43,6 +45,16 @@ public open class AggregateFlux<T>(private val delegate: AggregatePublisher<T>) 
     override fun batchSize(batchSize: Int): AggregateFlux<T> = delegate.batchSize(batchSize).toReactor()
 
     override fun first(): Mono<T> = delegate.first().toMono()
+
+    override fun explain(): Mono<Document> = delegate.explain().toMono()
+
+    override fun explain(verbosity: ExplainVerbosity): Mono<Document> = delegate.explain(verbosity).toMono()
+
+    override fun <E : Any> explain(explainResultClass: Class<E>): Mono<E> = delegate.explain(explainResultClass).toMono()
+
+    override fun <E : Any> explain(explainResultClass: Class<E>, verbosity: ExplainVerbosity?): Mono<E> {
+        return delegate.explain(explainResultClass, verbosity).toMono()
+    }
 
     override fun subscribe(actual: CoreSubscriber<in T>) {
         delegate.subscribe(actual)

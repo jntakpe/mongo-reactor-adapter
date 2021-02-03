@@ -1,6 +1,7 @@
 package com.mongodb.reactor.client
 
 import com.mongodb.CursorType
+import com.mongodb.ExplainVerbosity
 import com.mongodb.client.model.Collation
 import com.mongodb.reactivestreams.client.FindPublisher
 import io.mockk.confirmVerified
@@ -60,6 +61,10 @@ internal class FindFluxTest {
         flux.showRecordId(true)
         flux.batchSize(10)
         flux.allowDiskUse(true)
+        flux.explain()
+        flux.explain(ExplainVerbosity.QUERY_PLANNER)
+        flux.explain(Document::class.java)
+        flux.explain(Document::class.java, ExplainVerbosity.QUERY_PLANNER)
         val subscriber = Operators.emptySubscriber<Document>()
         flux.subscribe(subscriber)
         verifyAll {
@@ -85,6 +90,10 @@ internal class FindFluxTest {
             publisher.showRecordId(true)
             publisher.batchSize(10)
             publisher.allowDiskUse(true)
+            publisher.explain()
+            publisher.explain(ExplainVerbosity.QUERY_PLANNER)
+            publisher.explain(Document::class.java)
+            publisher.explain(Document::class.java, ExplainVerbosity.QUERY_PLANNER)
             publisher.subscribe(subscriber)
         }
         confirmVerified(publisher)

@@ -1,8 +1,10 @@
 package com.mongodb.reactor.client
 
 import com.mongodb.CursorType
+import com.mongodb.ExplainVerbosity
 import com.mongodb.client.model.Collation
 import com.mongodb.reactivestreams.client.FindPublisher
+import org.bson.Document
 import org.bson.conversions.Bson
 import reactor.core.CoreSubscriber
 import reactor.core.publisher.Flux
@@ -65,6 +67,16 @@ public open class FindFlux<T>(private val delegate: FindPublisher<T>) : Flux<T>(
     override fun batchSize(batchSize: Int): FindFlux<T> = delegate.batchSize(batchSize).toReactor()
 
     override fun allowDiskUse(allowDiskUse: Boolean?): FindFlux<T> = delegate.allowDiskUse(allowDiskUse).toReactor()
+
+    override fun explain(): Mono<Document> = delegate.explain().toMono()
+
+    override fun explain(verbosity: ExplainVerbosity): Mono<Document> = delegate.explain(verbosity).toMono()
+
+    override fun <E : Any> explain(explainResultClass: Class<E>): Mono<E> = delegate.explain(explainResultClass).toMono()
+
+    override fun <E : Any> explain(explainResultClass: Class<E>, verbosity: ExplainVerbosity?): Mono<E> {
+        return delegate.explain(explainResultClass, verbosity).toMono()
+    }
 
     override fun subscribe(actual: CoreSubscriber<in T>) {
         delegate.subscribe(actual)

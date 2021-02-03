@@ -1,6 +1,7 @@
 package com.mongodb.reactor.client
 
 import com.mongodb.BasicDBObject
+import com.mongodb.ExplainVerbosity
 import com.mongodb.client.model.Aggregates.match
 import com.mongodb.client.model.Aggregates.sort
 import com.mongodb.client.model.Collation
@@ -49,6 +50,10 @@ internal class AggregateFluxTest {
         flux.hint(hint)
         flux.batchSize(10)
         flux.first()
+        flux.explain()
+        flux.explain(ExplainVerbosity.QUERY_PLANNER)
+        flux.explain(Document::class.java)
+        flux.explain(Document::class.java, ExplainVerbosity.QUERY_PLANNER)
         val subscriber = Operators.emptySubscriber<Document>()
         flux.subscribe(subscriber)
         verifyAll {
@@ -62,6 +67,10 @@ internal class AggregateFluxTest {
             publisher.hint(hint)
             publisher.batchSize(10)
             publisher.first()
+            publisher.explain()
+            publisher.explain(ExplainVerbosity.QUERY_PLANNER)
+            publisher.explain(Document::class.java)
+            publisher.explain(Document::class.java, ExplainVerbosity.QUERY_PLANNER)
             publisher.subscribe(subscriber)
         }
         confirmVerified(publisher)
