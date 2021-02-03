@@ -7,11 +7,11 @@ val assertJVersion: String by project
 
 plugins {
     java
-    id("io.micronaut.application") version "1.0.3"
+    id("io.micronaut.application") version "1.3.3"
 }
 
 micronaut {
-    version("2.1.1")
+    version("2.3.0")
     runtime(MicronautRuntime.NETTY)
     testRuntime(JUNIT_5)
     processing {

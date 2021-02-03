@@ -12,11 +12,11 @@ plugins {
     kotlin("jvm") version kotlinVersion
     kotlin("kapt") version kotlinVersion
     kotlin("plugin.allopen") version kotlinVersion
-    id("io.micronaut.application") version "1.0.3"
+    id("io.micronaut.application") version "1.3.3"
 }
 
 micronaut {
-    version("2.1.1")
+    version("2.3.0")
     runtime(MicronautRuntime.NETTY)
     testRuntime(JUNIT_5)
     processing {
