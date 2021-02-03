@@ -8,7 +8,7 @@ val assertJVersion: String by project
 val kMongoVersion: String = "4.1.3"
 
 plugins {
-    val kotlinVersion = "1.4.10"
+    val kotlinVersion = "1.4.30"
     kotlin("jvm") version kotlinVersion
     kotlin("kapt") version kotlinVersion
     kotlin("plugin.allopen") version kotlinVersion
