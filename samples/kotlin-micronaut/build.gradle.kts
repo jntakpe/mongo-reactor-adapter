@@ -5,7 +5,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val reactorVersion: String by project
 val testContainersVersion: String by project
 val assertJVersion: String by project
-val kMongoVersion: String = "4.1.3"
+val kMongoVersion: String = "4.2.4"
 
 plugins {
     val kotlinVersion = "1.4.30"
