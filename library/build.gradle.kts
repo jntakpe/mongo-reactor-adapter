@@ -9,7 +9,7 @@ val testContainersVersion: String by project
 
 plugins {
     kotlin("jvm") version "1.4.30"
-    id("org.jetbrains.dokka") version "1.4.10.2"
+    id("org.jetbrains.dokka") version "1.4.20"
     `java-library`
     `maven-publish`
     signing
