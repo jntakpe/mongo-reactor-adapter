@@ -26,7 +26,7 @@ internal class TracingAggregateFluxTest {
     private val tracing = mockk<Tracing>(relaxed = true)
     private val publisher = mockk<AggregatePublisher<Document>>(relaxed = true)
     private val tracingFlux = spyk(TracingAggregateFlux(publisher, tracing))
-    private val collection = MongoContainer.database.getCollection(MongoContainer.COLLECTION_NAME).toTracingReactor(tracing)
+    private val collection = MongoContainer.database.getCollection(MongoContainer.COLLECTION_NAME)
 
     @BeforeEach
     fun init() {
@@ -70,6 +70,7 @@ internal class TracingAggregateFluxTest {
     @Test
     fun `tracing aggregate flux should emit items`() {
         collection
+            .toTracingReactor(tracing)
             .aggregate(listOf(match(Filters.eq("city", "Paris")), sort(Sorts.descending("username"))))
             .map { it["username"] }
             .test()

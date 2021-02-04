@@ -23,7 +23,7 @@ internal class TracingMapReduceFluxTest {
     private val tracing = mockk<Tracing>(relaxed = true)
     private val publisher = mockk<MapReducePublisher<Document>>(relaxed = true)
     private val tracingFlux = spyk(TracingMapReduceFlux(publisher, tracing))
-    private val collection = MongoContainer.database.getCollection(MongoContainer.COLLECTION_NAME).toTracingReactor(tracing)
+    private val collection = MongoContainer.database.getCollection(MongoContainer.COLLECTION_NAME)
 
     @BeforeEach
     fun init() {
@@ -84,6 +84,7 @@ internal class TracingMapReduceFluxTest {
     @Test
     fun `tracing map reduce flux should emit items`() {
         collection
+            .toTracingReactor(tracing)
             .mapReduce(
                 "function map() { emit(1, this.age) }",
                 "function reduce(key, values) { return Array.sum(values) }"

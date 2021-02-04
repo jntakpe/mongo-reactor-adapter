@@ -23,7 +23,7 @@ internal class TracingFindFluxTest {
     private val tracing = mockk<Tracing>(relaxed = true)
     private val publisher = mockk<FindPublisher<Document>>(relaxed = true)
     private val tracingFlux = spyk(TracingFindFlux(publisher, tracing))
-    private val collection = MongoContainer.database.getCollection(MongoContainer.COLLECTION_NAME).toTracingReactor(tracing)
+    private val collection = MongoContainer.database.getCollection(MongoContainer.COLLECTION_NAME)
 
     @BeforeEach
     fun init() {
@@ -93,6 +93,7 @@ internal class TracingFindFluxTest {
     @Test
     fun `tracing find flux should emit items`() {
         collection
+            .toTracingReactor(tracing)
             .find(Document("city", "Paris"))
             .map { it["username"] }
             .test()

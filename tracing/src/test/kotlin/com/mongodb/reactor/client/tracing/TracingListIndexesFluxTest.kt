@@ -20,7 +20,7 @@ internal class TracingListIndexesFluxTest {
     private val tracing = mockk<Tracing>(relaxed = true)
     private val publisher = mockk<ListIndexesPublisher<Document>>(relaxed = true)
     private val tracingFlux = spyk(TracingListIndexesFlux(publisher, tracing))
-    private val collection = MongoContainer.database.getCollection(MongoContainer.COLLECTION_NAME).toTracingReactor(tracing)
+    private val collection = MongoContainer.database.getCollection(MongoContainer.COLLECTION_NAME)
 
     @BeforeEach
     fun init() {
@@ -48,6 +48,7 @@ internal class TracingListIndexesFluxTest {
     @Test
     fun `tracing list indexes flux should emit items`() {
         collection
+            .toTracingReactor(tracing)
             .listIndexes()
             .test()
             .expectSubscription()

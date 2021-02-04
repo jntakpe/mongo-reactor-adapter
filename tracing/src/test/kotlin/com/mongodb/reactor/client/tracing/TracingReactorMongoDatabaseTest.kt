@@ -8,7 +8,6 @@ import com.mongodb.client.model.CreateCollectionOptions
 import com.mongodb.client.model.CreateViewOptions
 import com.mongodb.reactivestreams.client.ClientSession
 import com.mongodb.reactivestreams.client.MongoDatabase
-import com.mongodb.reactor.client.ReactorMongoDatabase
 import io.mockk.confirmVerified
 import io.mockk.mockk
 import io.mockk.spyk
@@ -25,7 +24,7 @@ internal class TracingReactorMongoDatabaseTest {
 
     private val tracing = mockk<Tracing>(relaxed = true)
     private val original = mockk<MongoDatabase>(relaxed = true)
-    private val reactor = spyk(ReactorMongoDatabase(original))
+    private val reactor = spyk(TracingReactorMongoDatabase(original, tracing))
     private val database = MongoContainer.database.toTracingReactor(tracing)
 
     @BeforeEach

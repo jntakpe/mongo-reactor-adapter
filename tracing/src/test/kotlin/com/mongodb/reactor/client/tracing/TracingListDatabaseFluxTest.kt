@@ -21,7 +21,7 @@ internal class TracingListDatabaseFluxTest {
     private val tracing = mockk<Tracing>(relaxed = true)
     private val publisher = mockk<ListDatabasesPublisher<Document>>(relaxed = true)
     private val tracingFlux = spyk(TracingListDatabaseFlux(publisher, tracing))
-    private val client = MongoContainer.client.toTracingReactor(tracing)
+    private val client = MongoContainer.client
 
     @BeforeEach
     fun init() {
@@ -56,6 +56,7 @@ internal class TracingListDatabaseFluxTest {
     @Test
     fun `tracing list database flux should emit items`() {
         client
+            .toTracingReactor(tracing)
             .listDatabaseNames()
             .filter { it == MongoContainer.DATABASE_NAME }
             .test()

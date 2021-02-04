@@ -2,6 +2,7 @@ package com.mongodb.reactor.client.tracing
 
 import brave.Tracing
 import com.mongodb.MongoNamespace
+import com.mongodb.MongoWriteException
 import com.mongodb.ReadConcern
 import com.mongodb.ReadPreference
 import com.mongodb.WriteConcern
@@ -24,7 +25,6 @@ import com.mongodb.client.model.ReplaceOptions
 import com.mongodb.client.model.UpdateOptions
 import com.mongodb.reactivestreams.client.ClientSession
 import com.mongodb.reactivestreams.client.MongoCollection
-import com.mongodb.reactor.client.ReactorMongoCollection
 import io.mockk.confirmVerified
 import io.mockk.mockk
 import io.mockk.spyk
@@ -41,8 +41,8 @@ internal class TracingReactorMongoCollectionTest {
 
     private val tracing = mockk<Tracing>(relaxed = true)
     private val original = mockk<MongoCollection<Document>>(relaxed = true)
-    private val tracingReactor = spyk(ReactorMongoCollection(original))
-    private val collection = MongoContainer.database.getCollection(MongoContainer.COLLECTION_NAME).toTracingReactor(tracing)
+    private val tracingReactor = spyk(TracingReactorMongoCollection(original, tracing))
+    private val collection = MongoContainer.database.getCollection(MongoContainer.COLLECTION_NAME)
 
     @BeforeEach
     fun init() {
@@ -349,6 +349,7 @@ internal class TracingReactorMongoCollectionTest {
     @Test
     fun `tracing reactor collection should emit items`() {
         collection
+            .toTracingReactor(tracing)
             .find()
             .map { it["username"] }
             .test()
@@ -357,5 +358,17 @@ internal class TracingReactorMongoCollectionTest {
             .expectNext("Pierre")
             .expectNext("Tom")
             .verifyComplete()
+    }
+
+    @Test
+    fun `tracing reactor collection should emit errors`() {
+        val tracingCollection = collection.toTracingReactor(tracing)
+        tracingCollection
+            .find()
+            .doOnEach { println(it) }
+            .collectList()
+            .flatMap { tracingCollection.insertOne(it.first()) }
+            .test()
+            .verifyError(MongoWriteException::class.java)
     }
 }

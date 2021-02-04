@@ -26,7 +26,7 @@ internal class TracingChangeStreamFluxTest {
     private val tracing = mockk<Tracing>(relaxed = true)
     private val publisher = mockk<ChangeStreamPublisher<Document>>(relaxed = true)
     private val tracingFlux = spyk(TracingChangeStreamFlux(publisher, tracing))
-    private val collection = MongoContainer.database.getCollection(MongoContainer.COLLECTION_NAME).toTracingReactor(tracing)
+    private val collection = MongoContainer.database.getCollection(MongoContainer.COLLECTION_NAME)
 
     @BeforeEach
     fun init() {
@@ -76,6 +76,7 @@ internal class TracingChangeStreamFluxTest {
             .delaySubscription(Duration.ofSeconds(1))
             .subscribe()
         collection
+            .toTracingReactor(tracing)
             .watch(Document::class.java)
             .map { it.fullDocument?.get("username", "Default") }
             .take(1)

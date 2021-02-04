@@ -22,7 +22,7 @@ internal class TracingDistinctFluxTest {
     private val tracing = mockk<Tracing>(relaxed = true)
     private val publisher = mockk<DistinctPublisher<Document>>(relaxed = true)
     private val tracingFlux = spyk(TracingDistinctFlux(publisher, tracing))
-    private val collection = MongoContainer.database.getCollection(MongoContainer.COLLECTION_NAME).toTracingReactor(tracing)
+    private val collection = MongoContainer.database.getCollection(MongoContainer.COLLECTION_NAME)
 
     @BeforeEach
     fun init() {
@@ -56,6 +56,7 @@ internal class TracingDistinctFluxTest {
     @Test
     fun `tracing distinct flux should emit items`() {
         collection
+            .toTracingReactor(tracing)
             .distinct("city", String::class.java)
             .test()
             .expectSubscription()

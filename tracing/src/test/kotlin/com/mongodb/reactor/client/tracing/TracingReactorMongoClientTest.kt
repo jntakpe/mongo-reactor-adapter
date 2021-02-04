@@ -4,8 +4,8 @@ import brave.Tracing
 import com.mongodb.ClientSessionOptions
 import com.mongodb.reactivestreams.client.ClientSession
 import com.mongodb.reactivestreams.client.MongoClient
-import com.mongodb.reactor.client.ReactorMongoClient
 import com.mongodb.reactor.client.tracing.MongoContainer
+import com.mongodb.reactor.client.tracing.TracingReactorMongoClient
 import com.mongodb.reactor.client.tracing.toTracingReactor
 import io.mockk.confirmVerified
 import io.mockk.mockk
@@ -22,8 +22,8 @@ internal class TracingReactorMongoClientTest {
 
     private val tracing = mockk<Tracing>(relaxed = true)
     private val original = mockk<MongoClient>(relaxed = true)
-    private val tracingReactor = spyk(ReactorMongoClient(original))
-    private val client = MongoContainer.client.toTracingReactor(tracing)
+    private val tracingReactor = spyk(TracingReactorMongoClient(original, tracing))
+    private val client = MongoContainer.client
 
     @BeforeEach
     fun init() {
@@ -84,6 +84,7 @@ internal class TracingReactorMongoClientTest {
     @Test
     fun `tracing reactor client should emit items`() {
         client
+            .toTracingReactor(tracing)
             .listDatabaseNames()
             .filter { it == MongoContainer.DATABASE_NAME }
             .test()
