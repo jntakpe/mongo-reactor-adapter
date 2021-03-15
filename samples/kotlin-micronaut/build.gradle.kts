@@ -12,7 +12,7 @@ plugins {
     kotlin("jvm") version kotlinVersion
     kotlin("kapt") version kotlinVersion
     kotlin("plugin.allopen") version kotlinVersion
-    id("io.micronaut.application") version "1.3.4"
+    id("io.micronaut.application") version "1.4.2"
 }
 
 micronaut {
