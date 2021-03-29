@@ -6,7 +6,7 @@ val kMongoVersion: String = "4.2.4"
 
 plugins {
     kotlin("jvm") version "1.4.30"
-    kotlin("plugin.spring") version "1.4.30"
+    kotlin("plugin.spring") version "1.4.32"
     id("org.springframework.boot") version "2.4.2"
 }
 
