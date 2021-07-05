@@ -59,7 +59,7 @@ tasks {
     jacocoTestReport {
         dependsOn(test)
         reports {
-            xml.isEnabled = true
+            xml.required.set(true)
         }
     }
     check {
