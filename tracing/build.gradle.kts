@@ -6,7 +6,7 @@ val braveVersion = "5.13.3"
 val mockkVersion = "1.12.0"
 val junitVersion = "5.7.1"
 val assertJVersion = "3.19.0"
-val testContainersVersion = "1.15.2"
+val testContainersVersion = "1.15.3"
 
 plugins {
     id("org.jetbrains.dokka") version "1.4.32"
