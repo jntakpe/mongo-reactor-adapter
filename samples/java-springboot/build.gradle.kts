@@ -1,6 +1,6 @@
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
-val testContainersVersion: String by project
+val testContainersVersion: String by rootProject.extra
 
 plugins {
     java

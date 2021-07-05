@@ -1,9 +1,9 @@
 import io.micronaut.gradle.MicronautRuntime
 import io.micronaut.gradle.MicronautTestRuntime.JUNIT_5
 
-val reactorVersion: String by project
-val testContainersVersion: String by project
-val assertJVersion: String by project
+val reactorVersion: String by rootProject.extra
+val testContainersVersion: String by rootProject.extra
+val assertJVersion: String by rootProject.extra
 
 plugins {
     java

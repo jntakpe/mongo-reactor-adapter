@@ -1,11 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val reactorVersion: String by project
-val mongoDriverVersion: String by project
-val junitVersion: String by project
-val mockkVersion: String by project
-val assertJVersion: String by project
-val testContainersVersion: String by project
+val reactorVersion: String by rootProject.extra
+val mongoDriverVersion: String by rootProject.extra
+val junitVersion: String by rootProject.extra
+val mockkVersion: String by rootProject.extra
+val assertJVersion: String by rootProject.extra
+val testContainersVersion: String by rootProject.extra
 
 plugins {
     kotlin("jvm") version "1.4.30"

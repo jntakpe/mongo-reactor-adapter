@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
-val testContainersVersion: String by project
+val testContainersVersion: String by rootProject.extra
 val kMongoVersion: String = "4.2.4"
 
 plugins {
