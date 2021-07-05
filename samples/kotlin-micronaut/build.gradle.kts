@@ -2,21 +2,20 @@ import io.micronaut.gradle.MicronautRuntime
 import io.micronaut.gradle.MicronautTestRuntime.JUNIT_5
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+val micronautVersion = "2.3.0"
 val reactorVersion: String by rootProject.extra
 val testContainersVersion: String by rootProject.extra
 val assertJVersion: String by rootProject.extra
 val kMongoVersion: String = "4.2.4"
 
 plugins {
-    val kotlinVersion = "1.4.30"
-    kotlin("jvm") version kotlinVersion
-    kotlin("kapt") version kotlinVersion
-    kotlin("plugin.allopen") version kotlinVersion
+    kotlin("kapt")
+    kotlin("plugin.allopen") version "1.5.20"
     id("io.micronaut.application") version "2.0.2"
 }
 
 micronaut {
-    version("2.3.0")
+    version(micronautVersion)
     runtime(MicronautRuntime.NETTY)
     testRuntime(JUNIT_5)
     processing {
@@ -26,8 +25,8 @@ micronaut {
 }
 
 dependencies {
-    kapt(platform("io.micronaut:micronaut-bom"))
-    kapt("io.micronaut:micronaut-inject-java")
+    kapt(platform("io.micronaut:micronaut-bom:$micronautVersion"))
+    kapt("io.micronaut:micronaut-inject-java:$micronautVersion")
     implementation(project(":mongo-reactor-adapter"))
     implementation(platform("io.projectreactor:reactor-bom:$reactorVersion"))
     implementation("io.micronaut:micronaut-validation")

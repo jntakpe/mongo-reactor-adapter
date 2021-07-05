@@ -6,9 +6,16 @@ val junitVersion by extra("5.7.1")
 val assertJVersion by extra("3.19.0")
 val testContainersVersion by extra("1.15.2")
 
+plugins {
+    kotlin("jvm") version "1.5.20"
+}
+
+
 subprojects {
     group = "com.github.jntakpe"
     version = "0.2.0"
+
+    apply(plugin = "org.jetbrains.kotlin.jvm")
 
     repositories {
         mavenCentral()

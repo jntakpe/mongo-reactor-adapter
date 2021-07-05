@@ -8,7 +8,6 @@ val assertJVersion: String by rootProject.extra
 val testContainersVersion: String by rootProject.extra
 
 plugins {
-    kotlin("jvm") version "1.4.30"
     id("org.jetbrains.dokka") version "1.4.32"
     `java-library`
     `maven-publish`
