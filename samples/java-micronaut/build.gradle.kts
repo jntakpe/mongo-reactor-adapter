@@ -7,7 +7,7 @@ val assertJVersion: String by project
 
 plugins {
     java
-    id("io.micronaut.application") version "1.3.4"
+    id("io.micronaut.application") version "2.0.2"
 }
 
 micronaut {
