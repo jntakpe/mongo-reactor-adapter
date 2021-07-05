@@ -2,9 +2,9 @@ import io.micronaut.gradle.MicronautRuntime
 import io.micronaut.gradle.MicronautTestRuntime.JUNIT_5
 
 val micronautVersion = "2.3.0"
-val reactorVersion: String by rootProject.extra
-val testContainersVersion: String by rootProject.extra
-val assertJVersion: String by rootProject.extra
+val reactorVersion = "2020.0.4"
+val assertJVersion = "3.19.0"
+val testContainersVersion = "1.15.2"
 
 plugins {
     java

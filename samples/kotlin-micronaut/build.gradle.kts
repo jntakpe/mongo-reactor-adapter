@@ -2,11 +2,11 @@ import io.micronaut.gradle.MicronautRuntime
 import io.micronaut.gradle.MicronautTestRuntime.JUNIT_5
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+val kMongoVersion = "4.2.4"
 val micronautVersion = "2.5.7"
-val reactorVersion: String by rootProject.extra
-val testContainersVersion: String by rootProject.extra
-val assertJVersion: String by rootProject.extra
-val kMongoVersion: String = "4.2.4"
+val reactorVersion = "2020.0.4"
+val assertJVersion = "3.19.0"
+val testContainersVersion = "1.15.2"
 
 plugins {
     kotlin("kapt")
