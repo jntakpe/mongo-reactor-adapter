@@ -2,7 +2,7 @@ import io.micronaut.gradle.MicronautRuntime
 import io.micronaut.gradle.MicronautTestRuntime.JUNIT_5
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val micronautVersion = "2.3.0"
+val micronautVersion = "2.5.7"
 val reactorVersion: String by rootProject.extra
 val testContainersVersion: String by rootProject.extra
 val assertJVersion: String by rootProject.extra
