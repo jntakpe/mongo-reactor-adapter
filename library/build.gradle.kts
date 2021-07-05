@@ -1,6 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val mongoDriverVersion = "4.2.0"
+val mongoDriverVersion = "4.2.3"
 val reactorVersion = "2020.0.4"
 val mockkVersion = "1.10.6"
 val junitVersion = "5.7.1"
