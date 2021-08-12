@@ -1,11 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val mongoDriverVersion = "4.2.3"
-val reactorVersion = "2020.0.8"
+val reactorVersion = "2020.0.10"
 val mockkVersion = "1.12.0"
 val junitVersion = "5.7.2"
 val assertJVersion = "3.20.2"
-val testContainersVersion = "1.15.3"
+val testContainersVersion = "1.16.0"
 
 plugins {
     id("org.jetbrains.dokka") version "1.5.0"
