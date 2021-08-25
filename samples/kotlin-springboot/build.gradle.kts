@@ -5,7 +5,7 @@ val kMongoVersion = "4.2.8"
 val testContainersVersion = "1.16.0"
 
 plugins {
-    kotlin("plugin.spring") version "1.5.21"
+    kotlin("plugin.spring") version "1.5.30"
     id("org.springframework.boot") version "2.5.4"
 }
 
