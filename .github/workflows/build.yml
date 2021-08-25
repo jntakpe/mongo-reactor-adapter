@@ -37,6 +37,6 @@ jobs:
       - name: Run tracing test suite
         run: ./gradlew -p tracing check
       - name: Code coverage
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v2.0.3
         with:
           files: ./library/build/reports/jacoco/test/jacocoTestReport.xml,./tracing/build/reports/jacoco/test/jacocoTestReport.xml
