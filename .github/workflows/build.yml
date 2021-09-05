@@ -20,14 +20,7 @@ jobs:
           distribution: 'adopt'
           java-version: '8'
           check-latest: true
-      - name: Cache Gradle packages
-        uses: actions/cache@v2.1.6
-        with:
-          path: |
-            ~/.gradle/caches/
-            ~/.gradle/wrapper/dists
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle.properties', 'gradle/**') }}
-          restore-keys: -${{ runner.os }}-gradle-
+          cache: gradle
       - name: Build library artifacts
         run: ./gradlew -p library assemble
       - name: Run library test suite
