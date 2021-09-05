@@ -351,7 +351,7 @@ internal class TracingReactorMongoCollectionTest {
         collection
             .toTracingReactor(tracing)
             .find()
-            .map { it["username"] }
+            .mapNotNull { it["username"] }
             .test()
             .expectSubscription()
             .expectNext("Jean")

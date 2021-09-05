@@ -95,7 +95,7 @@ internal class TracingFindFluxTest {
         collection
             .toTracingReactor(tracing)
             .find(Document("city", "Paris"))
-            .map { it["username"] }
+            .mapNotNull { it["username"] }
             .test()
             .expectSubscription()
             .expectNext("Jean")

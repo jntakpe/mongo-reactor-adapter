@@ -54,7 +54,7 @@ internal class ListCollectionFluxTest {
     fun `list collection flux should emit items`() {
         database
             .listCollections()
-            .map { it["name"] }
+            .mapNotNull { it["name"] }
             .test()
             .expectSubscription()
             .expectNext(COLLECTION_NAME)

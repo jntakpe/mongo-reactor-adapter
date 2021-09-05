@@ -90,7 +90,7 @@ internal class MapReduceFluxTest {
                 "function map() { emit(1, this.age) }",
                 "function reduce(key, values) { return Array.sum(values) }"
             )
-            .map { it["value"] }
+            .mapNotNull { it["value"] }
             .test()
             .expectSubscription()
             .expectNext(110.0)

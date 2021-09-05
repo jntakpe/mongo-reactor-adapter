@@ -54,7 +54,7 @@ internal class TracingListCollectionFluxTest {
         database
             .toTracingReactor(tracing)
             .listCollections()
-            .map { it["name"] }
+            .mapNotNull { it["name"] }
             .test()
             .expectSubscription()
             .expectNext(MongoContainer.COLLECTION_NAME)

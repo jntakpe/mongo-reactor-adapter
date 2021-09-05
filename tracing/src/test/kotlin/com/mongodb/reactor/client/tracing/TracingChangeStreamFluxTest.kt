@@ -78,7 +78,7 @@ internal class TracingChangeStreamFluxTest {
         collection
             .toTracingReactor(tracing)
             .watch(Document::class.java)
-            .map { it.fullDocument?.get("username", "Default") }
+            .mapNotNull { it.fullDocument?.get("username", "Default") }
             .take(1)
             .test()
             .expectNext(realName)

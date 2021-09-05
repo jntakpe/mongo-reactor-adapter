@@ -72,7 +72,7 @@ internal class TracingAggregateFluxTest {
         collection
             .toTracingReactor(tracing)
             .aggregate(listOf(match(Filters.eq("city", "Paris")), sort(Sorts.descending("username"))))
-            .map { it["username"] }
+            .mapNotNull { it["username"] }
             .test()
             .expectSubscription()
             .expectNext("Pierre")

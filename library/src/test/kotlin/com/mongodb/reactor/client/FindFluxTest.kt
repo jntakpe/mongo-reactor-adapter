@@ -103,7 +103,7 @@ internal class FindFluxTest {
     fun `find flux should emit items`() {
         collection
             .find(Document("city", "Paris"))
-            .map { it["username"] }
+            .mapNotNull { it["username"] }
             .test()
             .expectSubscription()
             .expectNext("Jean")

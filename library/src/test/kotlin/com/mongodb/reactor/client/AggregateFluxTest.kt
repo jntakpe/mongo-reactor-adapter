@@ -80,7 +80,7 @@ internal class AggregateFluxTest {
     fun `aggregate flux should emit items`() {
         collection
             .aggregate(listOf(match(Filters.eq("city", "Paris")), sort(Sorts.descending("username"))))
-            .map { it["username"] }
+            .mapNotNull { it["username"] }
             .test()
             .expectSubscription()
             .expectNext("Pierre")
