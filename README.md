@@ -21,13 +21,13 @@ Add this dependency to your project's build file :
 ###### Groovy script
 
 ````groovy
-implementation "com.github.jntakpe:mongo-reactor-adapter:0.2.1"
+implementation "com.github.jntakpe:mongo-reactor-adapter:0.3.0"
 ````
 
 ###### Kotlin script
 
 ```kotlin
-implementation("com.github.jntakpe:mongo-reactor-adapter:0.2.1")
+implementation("com.github.jntakpe:mongo-reactor-adapter:0.3.0")
 ```
 
 ### Maven users
@@ -37,7 +37,7 @@ implementation("com.github.jntakpe:mongo-reactor-adapter:0.2.1")
 <dependency>
     <groupId>com.github.jntakpe</groupId>
     <artifactId>mongo-reactor-adapter</artifactId>
-    <version>0.2.1</version>
+    <version>0.3.0</version>
 </dependency>
 ```
 
