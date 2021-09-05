@@ -54,6 +54,7 @@ internal class AggregateFluxTest {
         flux.explain(ExplainVerbosity.QUERY_PLANNER)
         flux.explain(Document::class.java)
         flux.explain(Document::class.java, ExplainVerbosity.QUERY_PLANNER)
+        flux.let(hint)
         val subscriber = Operators.emptySubscriber<Document>()
         flux.subscribe(subscriber)
         verifyAll {
@@ -71,6 +72,7 @@ internal class AggregateFluxTest {
             publisher.explain(ExplainVerbosity.QUERY_PLANNER)
             publisher.explain(Document::class.java)
             publisher.explain(Document::class.java, ExplainVerbosity.QUERY_PLANNER)
+            publisher.let(hint)
             publisher.subscribe(subscriber)
         }
         confirmVerified(publisher)

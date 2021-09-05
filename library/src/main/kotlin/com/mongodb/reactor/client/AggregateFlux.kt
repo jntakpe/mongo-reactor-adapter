@@ -56,6 +56,8 @@ public open class AggregateFlux<T>(private val delegate: AggregatePublisher<T>) 
         return delegate.explain(explainResultClass, verbosity).toMono()
     }
 
+    override fun let(variables: Bson?): AggregateFlux<T> = delegate.let(variables).toReactor()
+
     override fun subscribe(actual: CoreSubscriber<in T>) {
         delegate.subscribe(actual)
     }

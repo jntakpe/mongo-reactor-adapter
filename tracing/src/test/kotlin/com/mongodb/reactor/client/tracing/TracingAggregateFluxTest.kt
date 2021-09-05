@@ -51,6 +51,7 @@ internal class TracingAggregateFluxTest {
         val hint = BasicDBObject("test", "value")
         tracingFlux.hint(hint)
         tracingFlux.batchSize(10)
+        tracingFlux.let(hint)
         tracingFlux.first()
         verifyAll {
             publisher.allowDiskUse(true)
@@ -62,6 +63,7 @@ internal class TracingAggregateFluxTest {
             publisher.comment("test")
             publisher.hint(hint)
             publisher.batchSize(10)
+            publisher.let(hint)
             publisher.first()
         }
         confirmVerified(publisher)
