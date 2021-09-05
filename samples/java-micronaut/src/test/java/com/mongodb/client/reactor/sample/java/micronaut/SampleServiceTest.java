@@ -4,7 +4,9 @@ import com.mongodb.reactivestreams.client.MongoClient;
 import com.mongodb.reactivestreams.client.MongoCollection;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import io.micronaut.test.support.TestPropertyProvider;
+import jakarta.inject.Inject;
 import org.bson.types.ObjectId;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +15,6 @@ import org.testcontainers.containers.MongoDBContainer;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
@@ -42,6 +43,7 @@ class SampleServiceTest implements TestPropertyProvider {
         return container;
     }
 
+    @NotNull
     @Override
     public Map<String, String> getProperties() {
         return Collections.singletonMap("MONGO_PORT", container.getFirstMappedPort().toString());

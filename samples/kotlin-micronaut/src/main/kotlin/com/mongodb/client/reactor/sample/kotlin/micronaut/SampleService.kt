@@ -5,8 +5,8 @@ import com.mongodb.reactor.client.ReactorMongoClient
 import com.mongodb.reactor.client.ReactorMongoCollection
 import com.mongodb.reactor.client.ReactorMongoDatabase
 import com.mongodb.reactor.client.toReactor
+import jakarta.inject.Singleton
 import reactor.core.publisher.Mono
-import javax.inject.Singleton
 
 @Singleton
 class SampleService(reactiveStreamsClient: MongoClient) {

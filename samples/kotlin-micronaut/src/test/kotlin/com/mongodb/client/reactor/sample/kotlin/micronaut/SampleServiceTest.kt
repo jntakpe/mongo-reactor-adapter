@@ -3,6 +3,7 @@ package com.mongodb.client.reactor.sample.kotlin.micronaut
 import com.mongodb.reactivestreams.client.MongoClient
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import io.micronaut.test.support.TestPropertyProvider
+import jakarta.inject.Inject
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -11,7 +12,6 @@ import org.junit.jupiter.api.TestInstance
 import org.testcontainers.containers.MongoDBContainer
 import reactor.kotlin.core.publisher.toMono
 import reactor.kotlin.test.test
-import javax.inject.Inject
 
 @MicronautTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)

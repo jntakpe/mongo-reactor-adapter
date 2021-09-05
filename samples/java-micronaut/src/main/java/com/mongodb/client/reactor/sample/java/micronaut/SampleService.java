@@ -5,10 +5,10 @@ import com.mongodb.reactor.client.MongoReactorKt;
 import com.mongodb.reactor.client.ReactorMongoClient;
 import com.mongodb.reactor.client.ReactorMongoCollection;
 import com.mongodb.reactor.client.ReactorMongoDatabase;
+import jakarta.inject.Singleton;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import javax.inject.Singleton;
 
 @Singleton
 public class SampleService {
