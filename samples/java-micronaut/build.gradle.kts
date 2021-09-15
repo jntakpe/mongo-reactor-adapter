@@ -2,7 +2,7 @@ import io.micronaut.gradle.MicronautRuntime
 import io.micronaut.gradle.MicronautTestRuntime.JUNIT_5
 
 val micronautVersion = "3.0.0"
-val reactorVersion = "2020.0.10"
+val reactorVersion = "2020.0.11"
 val assertJVersion = "3.20.2"
 val testContainersVersion = "1.16.0"
 
