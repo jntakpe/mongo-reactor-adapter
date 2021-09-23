@@ -4,7 +4,7 @@ val mongoDriverVersion = "4.2.0"
 val reactorVersion = "2020.0.4"
 val braveVersion = "5.13.3"
 val mockkVersion = "1.12.0"
-val junitVersion = "5.7.2"
+val junitVersion = "5.8.1"
 val assertJVersion = "3.20.2"
 val testContainersVersion = "1.16.0"
 
