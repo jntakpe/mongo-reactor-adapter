@@ -8,7 +8,7 @@ val testContainersVersion = "1.16.0"
 
 plugins {
     java
-    id("io.micronaut.application") version "2.0.4"
+    id("io.micronaut.application") version "2.0.6"
 }
 
 micronaut {
