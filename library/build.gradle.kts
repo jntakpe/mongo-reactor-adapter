@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val mongoDriverVersion = "4.3.2"
 val reactorVersion = "2020.0.10"
 val mockkVersion = "1.12.0"
-val junitVersion = "5.7.2"
+val junitVersion = "5.8.2"
 val assertJVersion = "3.20.2"
 val testContainersVersion = "1.16.0"
 
