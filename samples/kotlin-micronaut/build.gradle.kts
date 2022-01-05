@@ -6,7 +6,7 @@ val kMongoVersion = "4.4.0"
 val micronautVersion = "3.2.4"
 val reactorVersion = "2020.0.14"
 val assertJVersion = "3.20.2"
-val testContainersVersion = "1.16.0"
+val testContainersVersion = "1.16.2"
 
 plugins {
     kotlin("kapt")
