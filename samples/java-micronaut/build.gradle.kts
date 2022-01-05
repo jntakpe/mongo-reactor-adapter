@@ -3,7 +3,7 @@ import io.micronaut.gradle.MicronautTestRuntime.JUNIT_5
 
 val micronautVersion = "3.0.0"
 val reactorVersion = "2020.0.14"
-val assertJVersion = "3.20.2"
+val assertJVersion = "3.22.0"
 val testContainersVersion = "1.16.2"
 
 plugins {
