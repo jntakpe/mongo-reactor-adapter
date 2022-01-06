@@ -4,7 +4,7 @@ plugins {
 
 subprojects {
     group = "com.github.jntakpe"
-    version = "0.3.1"
+    version = "0.3.2"
 
     apply(plugin = "org.jetbrains.kotlin.jvm")
 
