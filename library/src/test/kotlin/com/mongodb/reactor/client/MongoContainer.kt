@@ -13,7 +13,7 @@ internal object MongoContainer {
     const val DATABASE_NAME = "test"
     const val COLLECTION_NAME = "people"
     private const val MONGO_DOCKER_IMAGE = "mongo"
-    private const val MONGO_VERSION = "4.2.10"
+    private const val MONGO_VERSION = "4.4"
     private const val MONGO_PROTOCOL = "mongodb://"
     val client: MongoClient = run {
         val container = MongoDBContainer("$MONGO_DOCKER_IMAGE:$MONGO_VERSION").apply { start() }
