@@ -42,6 +42,8 @@ public open class AggregateFlux<T>(private val delegate: AggregatePublisher<T>) 
 
     override fun hint(hint: Bson?): AggregateFlux<T> = delegate.hint(hint).toReactor()
 
+    override fun hintString(hint: String?): AggregateFlux<T> = delegate.hintString(hint).toReactor()
+
     override fun batchSize(batchSize: Int): AggregateFlux<T> = delegate.batchSize(batchSize).toReactor()
 
     override fun first(): Mono<T> = delegate.first().toMono()
