@@ -21,13 +21,13 @@ Add this dependency to your project's build file :
 ###### Groovy script
 
 ````groovy
-implementation "com.github.jntakpe:mongo-reactor-adapter:0.3.0"
+implementation "com.github.jntakpe:mongo-reactor-adapter:0.3.1"
 ````
 
 ###### Kotlin script
 
 ```kotlin
-implementation("com.github.jntakpe:mongo-reactor-adapter:0.3.0")
+implementation("com.github.jntakpe:mongo-reactor-adapter:0.3.1")
 ```
 
 ### Maven users
@@ -37,7 +37,7 @@ implementation("com.github.jntakpe:mongo-reactor-adapter:0.3.0")
 <dependency>
     <groupId>com.github.jntakpe</groupId>
     <artifactId>mongo-reactor-adapter</artifactId>
-    <version>0.3.0</version>
+    <version>0.3.1</version>
 </dependency>
 ```
 
@@ -123,6 +123,3 @@ and extensively implements the Reactive Streams specification providing an effic
 
 MongoDB's reactor adapter combines both MongoDB Reactive Streams Java driver API's together with Reactor to offer the best of two worlds.
 No more wrapping required, you can directly leverage Reactor's operators power when querying your Mongo database.
-
-
-
