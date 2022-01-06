@@ -20,7 +20,7 @@ internal class SampleServiceTest : TestPropertyProvider {
     companion object {
 
         private const val DB_NAME = "test"
-        private val container = MongoDBContainer("mongo:4.2.10").apply { start() }
+        private val container = MongoDBContainer("mongo:4.4").apply { start() }
     }
 
     @Inject lateinit var service: SampleService

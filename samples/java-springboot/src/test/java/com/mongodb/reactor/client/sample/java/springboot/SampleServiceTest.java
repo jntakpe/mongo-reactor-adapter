@@ -34,7 +34,7 @@ class SampleServiceTest {
     private MongoClient client;
 
     static MongoDBContainer initContainer() {
-        MongoDBContainer container = new MongoDBContainer("mongo:4.2.10");
+        MongoDBContainer container = new MongoDBContainer("mongo:4.4");
         container.start();
         return container;
     }

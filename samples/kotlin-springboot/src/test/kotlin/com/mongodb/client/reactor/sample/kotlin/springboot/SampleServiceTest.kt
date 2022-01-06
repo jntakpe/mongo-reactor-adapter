@@ -19,7 +19,7 @@ internal class SampleServiceTest(@Autowired private val service: SampleService, 
     companion object {
 
         private const val DB_NAME = "test"
-        private val container = MongoDBContainer("mongo:4.2.10").apply { start() }
+        private val container = MongoDBContainer("mongo:4.4").apply { start() }
 
         @JvmStatic
         @DynamicPropertySource
