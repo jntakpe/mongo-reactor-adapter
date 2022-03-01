@@ -2,7 +2,7 @@ import io.micronaut.gradle.MicronautRuntime
 import io.micronaut.gradle.MicronautTestRuntime.JUNIT_5
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val kMongoVersion = "4.4.0"
+val kMongoVersion = "4.5.0"
 val micronautVersion = "3.3.0"
 val reactorVersion = "2020.0.15"
 val assertJVersion = "3.22.0"
