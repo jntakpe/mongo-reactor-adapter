@@ -11,7 +11,7 @@ val testContainersVersion = "1.16.3"
 plugins {
     kotlin("kapt")
     kotlin("plugin.allopen") version "1.6.10"
-    id("io.micronaut.application") version "3.2.2"
+    id("io.micronaut.application") version "3.3.1"
 }
 
 micronaut {
