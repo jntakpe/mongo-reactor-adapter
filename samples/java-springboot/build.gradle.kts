@@ -4,7 +4,7 @@ val testContainersVersion = "1.16.3"
 
 plugins {
     java
-    id("org.springframework.boot") version "2.6.4"
+    id("org.springframework.boot") version "2.6.6"
 }
 
 dependencies {
