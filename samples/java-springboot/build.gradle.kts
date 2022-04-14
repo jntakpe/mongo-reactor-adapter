@@ -1,6 +1,6 @@
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
-val testContainersVersion = "1.16.3"
+val testContainersVersion = "1.17.1"
 
 plugins {
     java
