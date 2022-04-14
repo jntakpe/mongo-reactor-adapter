@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 val kMongoVersion = "4.5.0"
-val testContainersVersion = "1.16.3"
+val testContainersVersion = "1.17.1"
 
 plugins {
     kotlin("plugin.spring") version "1.6.10"
