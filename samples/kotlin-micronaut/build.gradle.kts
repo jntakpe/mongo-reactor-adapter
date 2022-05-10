@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val kMongoVersion = "4.5.1"
 val micronautVersion = "3.4.2"
-val reactorVersion = "2020.0.18"
+val reactorVersion = "2020.0.19"
 val assertJVersion = "3.22.0"
 val testContainersVersion = "1.17.1"
 
