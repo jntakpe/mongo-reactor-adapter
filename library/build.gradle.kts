@@ -2,13 +2,13 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val mongoDriverVersion = "4.5.1"
 val reactorVersion = "2020.0.21"
-val mockkVersion = "1.12.3"
+val mockkVersion = "1.12.5"
 val junitVersion = "5.9.0"
 val assertJVersion = "3.23.1"
 val testContainersVersion = "1.17.3"
 
 plugins {
-    id("org.jetbrains.dokka") version "1.6.21"
+    id("org.jetbrains.dokka") version "1.7.10"
     `java-library`
     `maven-publish`
     signing
