@@ -8,7 +8,7 @@ val assertJVersion = "3.23.1"
 val testContainersVersion = "1.17.3"
 
 plugins {
-    id("org.jetbrains.dokka") version "1.6.21"
+    id("org.jetbrains.dokka") version "1.7.10"
     `java-library`
     `maven-publish`
     signing
