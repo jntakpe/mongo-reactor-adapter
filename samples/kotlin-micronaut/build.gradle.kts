@@ -5,12 +5,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val kMongoVersion = "4.5.1"
 val micronautVersion = "3.5.3"
 val reactorVersion = "2020.0.21"
-val assertJVersion = "3.22.0"
+val assertJVersion = "3.23.1"
 val testContainersVersion = "1.17.3"
 
 plugins {
     kotlin("kapt")
-    kotlin("plugin.allopen") version "1.6.21"
+    kotlin("plugin.allopen") version "1.7.10"
     id("io.micronaut.application") version "3.2.2"
 }
 
