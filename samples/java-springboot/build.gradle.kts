@@ -1,10 +1,10 @@
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
-val testContainersVersion = "1.17.1"
+val testContainersVersion = "1.17.3"
 
 plugins {
     java
-    id("org.springframework.boot") version "2.6.7"
+    id("org.springframework.boot") version "2.7.2"
 }
 
 dependencies {
